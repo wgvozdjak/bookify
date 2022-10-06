@@ -1,9 +1,20 @@
-<template>
+<!--<template>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+</template>-->
+
+<template>
+  <div class="container" style="padding: 50px 0 100px 0">
+    <Account v-if="user" />
+    <Auth v-else />
+  </div>
 </template>
 
 <script setup>
-  import '@/assets/global.css';
+  const user = useSupabaseUser()
 </script>
+
+<!--<script setup>
+  import '@/assets/global.css';
+</script>-->
