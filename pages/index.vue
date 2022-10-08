@@ -94,8 +94,13 @@
         </div>
         </div>
     </div>
-    <SettingsPopup />
 </template>
+
+<script>
+    export default {
+
+    }
+</script>
 
 <style>
 .books-read-table .td, .books-read-table .th {

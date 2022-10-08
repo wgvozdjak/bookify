@@ -10,6 +10,7 @@
                     <a href="#" class="px-4 py-2 text-2xl text-slate-900 font-josefin">goals</a>
                     <a href="#" class="px-4 py-2 text-2xl text-slate-900 font-josefin">data</a>
                     <a href="#" class="px-4 py-2 text-2xl text-slate-900 font-josefin">recommendations</a>
+                    <button href="#" class="px-4 py-2 text-2xl text-slate-900 font-josefin" @click="$emit('settingsClicked')">settings</button>
                 </div>
             </nav>
         </div>
