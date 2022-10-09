@@ -30,7 +30,7 @@
 </template>
   
 <script setup>
-  let isVisible = ref(true);
+  let isVisible = ref(false);
   function closePopup() {
     isVisible.value = false;
   }
@@ -40,7 +40,7 @@
 
   defineExpose({openPopup});
 
-  /*const supabase = useSupabaseClient()
+  const supabase = useSupabaseClient()
 
   const loading = ref(false)
   const email = ref('')
@@ -55,6 +55,6 @@
     } finally {
       loading.value = false
     }
-  }*/
+  }
 </script>
   
