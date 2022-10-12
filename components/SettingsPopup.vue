@@ -9,22 +9,22 @@
   >
     <div
       v-if="isVisible"
-      class="flex w-full h-full fixed top-0 left-0 justify-center items-center bg-black bg-opacity-20"
+      class="fixed top-0 left-0 flex h-full w-full items-center justify-center bg-black bg-opacity-20"
     >
       <div
-        class="shadow-xl flex bg-solid bg-white border-2 border-solid border-black w-[425px] rounded-3xl p-4 pb-5"
+        class="bg-solid flex w-[425px] rounded-3xl border-2 border-solid border-black bg-white p-4 pb-5 shadow-xl"
       >
         <form v-if="!user" @submit.prevent="handleLogin" class="w-full">
-          <div class="flex flex-col gap-3 w-full">
-            <div class="w-full flex flex-row justify-between">
-              <h1 class="font-bold text-xl">bookify settings</h1>
+          <div class="flex w-full flex-col gap-3">
+            <div class="flex w-full flex-row justify-between">
+              <h1 class="text-xl font-bold">bookify settings</h1>
               <button class="text-xl" @click="closePopup">&#x2715;</button>
             </div>
             <!--<p class="description ">Sign in via magic link with your email below</p>-->
-            <div class="flex flex-col gap-1 w-full">
+            <div class="flex w-full flex-col gap-1">
               <h2>Sign in with magic link</h2>
               <input
-                class="w-full border-2 border-solid border-gray-300 p-1 rounded-md"
+                class="w-full rounded-md border-2 border-solid border-gray-300 p-1"
                 type="email"
                 placeholder="Your email"
                 v-model="email"
@@ -32,7 +32,7 @@
               <div>
                 <input
                   type="submit"
-                  class="w-full border-2 border-solid border-gray-300 bg-gray-200 rounded-md p-1 text-left cursor-pointer hover:bg-gray-300 active:bg-gray-400 active:border-gray-400"
+                  class="w-full cursor-pointer rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 text-left hover:bg-gray-300 active:border-gray-400 active:bg-gray-400"
                   :value="loading ? 'Loading' : 'Send magic link'"
                   :disabled="loading"
                 />
@@ -45,17 +45,17 @@
         <!-- TODO: Migrate to use @tailwindcss/forms -->
         <form
           v-else
-          class="flex flex-col w-full gap-10"
+          class="flex w-full flex-col gap-10"
           @submit.prevent="updateProfile"
         >
-          <div class="w-full flex flex-row justify-between">
-            <h1 class="font-bold text-xl">bookify settings</h1>
+          <div class="flex w-full flex-row justify-between">
+            <h1 class="text-xl font-bold">bookify settings</h1>
             <button class="text-xl" @click="closePopup">&#x2715;</button>
           </div>
 
           <div class="relative">
             <input
-              class="w-full py-2 bg-white border-b-2 focus:border-sky-500 focus:outline-none peer placeholder-transparent"
+              class="peer w-full border-b-2 bg-white py-2 placeholder-transparent focus:border-sky-500 focus:outline-none"
               id="email"
               placeholder="Email"
               type="text"
@@ -64,13 +64,13 @@
             />
             <label
               for="email"
-              class="cursor-text absolute left-0 -top-3.5 text-sky-500 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-sky-500 peer-focus:text-sm"
+              class="absolute left-0 -top-3.5 cursor-text text-sm text-sky-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-sky-500"
               >Email</label
             >
           </div>
           <div class="relative">
             <input
-              class="w-full py-2 bg-white border-b-2 focus:border-sky-500 focus:outline-none peer placeholder-transparent"
+              class="peer w-full border-b-2 bg-white py-2 placeholder-transparent focus:border-sky-500 focus:outline-none"
               id="username"
               type="text"
               placeholder="Username"
@@ -78,13 +78,13 @@
             />
             <label
               for="username"
-              class="cursor-text absolute left-0 -top-3.5 text-sky-500 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-sky-500 peer-focus:text-sm"
+              class="absolute left-0 -top-3.5 cursor-text text-sm text-sky-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-sky-500"
               >Username</label
             >
           </div>
           <div class="relative">
             <input
-              class="w-full py-2 bg-white border-b-2 focus:border-sky-500 focus:outline-none peer placeholder-transparent"
+              class="peer w-full border-b-2 bg-white py-2 placeholder-transparent focus:border-sky-500 focus:outline-none"
               id="website"
               type="website"
               placeholder="Website"
@@ -92,21 +92,21 @@
             />
             <label
               for="website"
-              class="cursor-text absolute left-0 -top-3.5 text-sky-500 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-sky-500 peer-focus:text-sm"
+              class="absolute left-0 -top-3.5 cursor-text text-sm text-sky-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-sky-500"
               >Website</label
             >
           </div>
 
-          <div class="flex flex-row w-full gap-4">
+          <div class="flex w-full flex-row gap-4">
             <input
               type="submit"
-              class="py-2 basis-1/2 bg-sky-500 rounded-lg justify-center cursor-pointer hover:bg-sky-400 font-semibold transition"
+              class="basis-1/2 cursor-pointer justify-center rounded-lg bg-sky-500 py-2 font-semibold transition hover:bg-sky-400"
               :value="loading ? 'Loading ...' : 'Update'"
               :disabled="loading"
             />
 
             <button
-              class="py-2 basis-1/2 bg-sky-500 rounded-lg justify-center cursor-pointer hover:bg-sky-400 font-semibold transition"
+              class="basis-1/2 cursor-pointer justify-center rounded-lg bg-sky-500 py-2 font-semibold transition hover:bg-sky-400"
               @click="signOut"
               :disabled="loading"
             >

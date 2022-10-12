@@ -4,12 +4,12 @@
     <div>hi there! welcome to bookify 👋</div>
 
     <!-- main content -->
-    <div class="flex flex-row w-full gap-4 mt-4">
+    <div class="mt-4 flex w-full flex-row gap-4">
       <!-- table of books read -->
-      <div class="flex flex-col basis-1/2">
+      <div class="flex basis-1/2 flex-col">
         <div>books read (sign in to add books)</div>
         <div
-          class="flex-1 flex flex-col books-read-table mt-2 border-solid border-2 border-black rounded-2xl border-separate border-spacing-0"
+          class="books-read-table mt-2 flex flex-1 border-separate border-spacing-0 flex-col rounded-2xl border-2 border-solid border-black"
         >
           <div class="tr">
             <div class="th">date</div>
@@ -26,7 +26,7 @@
               <div class="flex items-center">
                 <svg
                   aria-hidden="true"
-                  class="w-5 h-5 text-yellow-400"
+                  class="h-5 w-5 text-yellow-400"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@
                 </svg>
                 <svg
                   aria-hidden="true"
-                  class="w-5 h-5 text-yellow-400"
+                  class="h-5 w-5 text-yellow-400"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@
                 </svg>
                 <svg
                   aria-hidden="true"
-                  class="w-5 h-5 text-yellow-400"
+                  class="h-5 w-5 text-yellow-400"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +62,7 @@
                 </svg>
                 <svg
                   aria-hidden="true"
-                  class="w-5 h-5 text-yellow-400"
+                  class="h-5 w-5 text-yellow-400"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +74,7 @@
                 </svg>
                 <svg
                   aria-hidden="true"
-                  class="w-5 h-5 text-gray-300 dark:text-gray-500"
+                  class="h-5 w-5 text-gray-300 dark:text-gray-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@
               <div class="flex items-center">
                 <svg
                   aria-hidden="true"
-                  class="w-5 h-5 text-yellow-400"
+                  class="h-5 w-5 text-yellow-400"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +108,7 @@
                 </svg>
                 <svg
                   aria-hidden="true"
-                  class="w-5 h-5 text-yellow-400"
+                  class="h-5 w-5 text-yellow-400"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +120,7 @@
                 </svg>
                 <svg
                   aria-hidden="true"
-                  class="w-5 h-5 text-yellow-400"
+                  class="h-5 w-5 text-yellow-400"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +132,7 @@
                 </svg>
                 <svg
                   aria-hidden="true"
-                  class="w-5 h-5 text-gray-300 dark:text-gray-500"
+                  class="h-5 w-5 text-gray-300 dark:text-gray-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +144,7 @@
                 </svg>
                 <svg
                   aria-hidden="true"
-                  class="w-5 h-5 text-gray-300 dark:text-gray-500"
+                  class="h-5 w-5 text-gray-300 dark:text-gray-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -162,7 +162,7 @@
       </div>
 
       <!-- books read graph -->
-      <div class="flex flex-col basis-1/2">
+      <div class="flex basis-1/2 flex-col">
         <div>2022 book chart</div>
         <div>
           <img
@@ -173,15 +173,15 @@
     </div>
 
     <!-- other features -->
-    <div class="flex flex-col w-full mt-8">
+    <div class="mt-8 flex w-full flex-col">
       <!-- header -->
       <div class="mx-auto">other features</div>
 
       <!-- buttons -->
-      <div class="w-full flex flex-row justify-between mb-8">
+      <div class="mb-8 flex w-full flex-row justify-between">
         <NuxtLink
           to="/"
-          class="border-2 border-black border-solid rounded-2xl px-4 py-2 w-1/5 inline-block"
+          class="inline-block w-1/5 rounded-2xl border-2 border-solid border-black px-4 py-2"
         >
           data
           <svg
@@ -190,7 +190,7 @@
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6 inline mb-[2px]"
+            class="mb-[2px] inline h-6 w-6"
           >
             <path
               stroke-linecap="round"
@@ -202,7 +202,7 @@
 
         <NuxtLink
           to="/"
-          class="border-2 border-black border-solid rounded-2xl px-4 py-2 w-1/5 inline-block"
+          class="inline-block w-1/5 rounded-2xl border-2 border-solid border-black px-4 py-2"
         >
           recommendations
           <svg
@@ -211,7 +211,7 @@
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6 inline mb-[2px]"
+            class="mb-[2px] inline h-6 w-6"
           >
             <path
               stroke-linecap="round"
@@ -223,7 +223,7 @@
 
         <NuxtLink
           to="/"
-          class="border-2 border-black border-solid rounded-2xl px-4 py-2 w-1/5 inline-block"
+          class="inline-block w-1/5 rounded-2xl border-2 border-solid border-black px-4 py-2"
         >
           isbn to goodreads
           <svg
@@ -232,7 +232,7 @@
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6 inline mb-[2px]"
+            class="mb-[2px] inline h-6 w-6"
           >
             <path
               stroke-linecap="round"
