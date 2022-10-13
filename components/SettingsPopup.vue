@@ -46,7 +46,7 @@
         <form
           v-else
           class="flex w-full flex-col gap-10"
-          @submit.prevent="updateProfile"
+          @submit.prevent="loadingProfile"
         >
           <div class="flex w-full flex-row justify-between">
             <h1 class="text-xl font-bold">bookify settings</h1>
@@ -101,7 +101,7 @@
             <input
               type="submit"
               class="basis-1/2 cursor-pointer justify-center rounded-lg bg-sky-500 py-2 font-semibold transition hover:bg-sky-400"
-              :value="loading ? 'Loading ...' : 'Update'"
+              :value="loading ? 'Loading ...' : 'loading'"
               :disabled="loading"
             />
 
@@ -120,7 +120,15 @@
 </template>
 
 <script setup>
+const supabase = useSupabaseClient();
 const user = useSupabaseUser();
+console.log(user);
+
+if (user) {
+  console.log("yes");
+}
+
+defineExpose({ openPopup });
 
 let isVisible = ref(false);
 function closePopup() {
@@ -130,12 +138,13 @@ function openPopup() {
   isVisible.value = true;
 }
 
-defineExpose({ openPopup });
-
-const supabase = useSupabaseClient();
-
 const loading = ref(false);
+const username = ref("");
+const website = ref("");
+const avatar_path = ref("");
 const email = ref("");
+
+// SIGNING IN (WHEN USER IS NOT SIGNED IN)
 const handleLogin = async () => {
   try {
     loading.value = true;
@@ -148,4 +157,56 @@ const handleLogin = async () => {
     loading.value = false;
   }
 };
+
+// PROFILE UPDATING (WHEN USER IS SIGNED IN)
+/*if (user) {
+  loading.value = true;
+  let { data } = await supabase
+    .from("profiles")
+    .select(`username, website, avatar_url`)
+    .eq("id", user.value.id)
+    .single();
+  if (data) {
+    username.value = data.username;
+    website.value = data.website;
+    avatar_path.value = data.avatar_url;
+  }
+  loading.value = false;
+}*/
+
+async function loadingProfile() {
+  console.log("here");
+  /*try {
+    loading.value = true;
+    const user = useSupabaseUser();
+    console.log("here");
+    const loadings = {
+      id: user.value.id,
+      username: username.value,
+      website: website.value,
+      avatar_url: avatar_path.value,
+      loadingd_at: new Date(),
+    };
+    let { error } = await supabase.from("profiles").upsert(loadings, {
+      returning: "minimal", // Don't return the value after inserting
+    });
+    if (error) throw error;
+  } catch (error) {
+    alert(error.message);
+  } finally {
+    loading.value = false;
+  }*/
+}
+
+async function signOut() {
+  try {
+    loading.value = true;
+    let { error } = await supabase.auth.signOut();
+    if (error) throw error;
+  } catch (error) {
+    alert(error.message);
+  } finally {
+    loading.value = false;
+  }
+}
 </script>
