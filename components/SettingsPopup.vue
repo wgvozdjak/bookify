@@ -18,7 +18,9 @@
           <div class="flex w-full flex-col gap-3">
             <div class="flex w-full flex-row justify-between">
               <h1 class="text-xl font-bold">bookify settings</h1>
-              <button class="text-xl" @click="closePopup">&#x2715;</button>
+              <button class="text-xl" @click="closePopup" type="button">
+                &#x2715;
+              </button>
             </div>
             <!--<p class="description ">Sign in via magic link with your email below</p>-->
             <div class="flex w-full flex-col gap-1">
@@ -46,7 +48,7 @@
         <form
           v-else
           class="flex w-full flex-col gap-10"
-          @submit.prevent="loadingProfile"
+          @submit.prevent="updateProfile"
         >
           <div class="flex w-full flex-row justify-between">
             <h1 class="text-xl font-bold">bookify settings</h1>
@@ -101,7 +103,7 @@
             <input
               type="submit"
               class="basis-1/2 cursor-pointer justify-center rounded-lg bg-sky-500 py-2 font-semibold transition hover:bg-sky-400"
-              :value="loading ? 'Loading ...' : 'loading'"
+              :value="loading ? 'Loading ...' : 'Update'"
               :disabled="loading"
             />
 
@@ -122,11 +124,6 @@
 <script setup>
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
-console.log(user);
-
-if (user) {
-  console.log("yes");
-}
 
 defineExpose({ openPopup });
 
@@ -144,7 +141,7 @@ const website = ref("");
 const avatar_path = ref("");
 const email = ref("");
 
-// SIGNING IN (WHEN USER IS NOT SIGNED IN)
+// --- SIGNING IN (WHEN USER IS NOT SIGNED IN)
 const handleLogin = async () => {
   try {
     loading.value = true;
@@ -158,8 +155,9 @@ const handleLogin = async () => {
   }
 };
 
-// PROFILE UPDATING (WHEN USER IS SIGNED IN)
-/*if (user) {
+// --- PROFILE UPDATING (WHEN USER IS SIGNED IN)
+// Get current profile data
+if (user.value) {
   loading.value = true;
   let { data } = await supabase
     .from("profiles")
@@ -172,22 +170,21 @@ const handleLogin = async () => {
     avatar_path.value = data.avatar_url;
   }
   loading.value = false;
-}*/
+}
 
-async function loadingProfile() {
-  console.log("here");
-  /*try {
+// Update profile data
+async function updateProfile() {
+  try {
     loading.value = true;
     const user = useSupabaseUser();
-    console.log("here");
-    const loadings = {
+    const updates = {
       id: user.value.id,
       username: username.value,
       website: website.value,
       avatar_url: avatar_path.value,
-      loadingd_at: new Date(),
+      updated_at: new Date(),
     };
-    let { error } = await supabase.from("profiles").upsert(loadings, {
+    let { error } = await supabase.from("profiles").upsert(updates, {
       returning: "minimal", // Don't return the value after inserting
     });
     if (error) throw error;
@@ -195,9 +192,10 @@ async function loadingProfile() {
     alert(error.message);
   } finally {
     loading.value = false;
-  }*/
+  }
 }
 
+// --- SIGN OUT
 async function signOut() {
   try {
     loading.value = true;

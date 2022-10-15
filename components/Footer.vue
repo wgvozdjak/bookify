@@ -9,26 +9,28 @@
       </div>
       <div class="ml-7 basis-1/2">
         <table class="w-full text-left">
-          <tr>
-            <th>features</th>
-            <th>account</th>
-          </tr>
-          <tr>
-            <td><NuxtLink to="#">home</NuxtLink></td>
-            <td><NuxtLink to="#">sign in</NuxtLink></td>
-          </tr>
-          <tr>
-            <td><NuxtLink to="#">goals</NuxtLink></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><NuxtLink to="#">data</NuxtLink></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><NuxtLink to="#">recommendations</NuxtLink></td>
-            <td></td>
-          </tr>
+          <tbody>
+            <tr>
+              <th>features</th>
+              <th>account</th>
+            </tr>
+            <tr>
+              <td><NuxtLink to="#">home</NuxtLink></td>
+              <td><NuxtLink to="#">sign in</NuxtLink></td>
+            </tr>
+            <tr>
+              <td><NuxtLink to="#">goals</NuxtLink></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><NuxtLink to="#">data</NuxtLink></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><NuxtLink to="#">recommendations</NuxtLink></td>
+              <td></td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
