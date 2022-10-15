@@ -52,7 +52,9 @@
         >
           <div class="flex w-full flex-row justify-between">
             <h1 class="text-xl font-bold">bookify settings</h1>
-            <button class="text-xl" @click="closePopup">&#x2715;</button>
+            <button class="text-xl" @click="closePopup" type="button">
+              &#x2715;
+            </button>
           </div>
 
           <div class="relative">
@@ -157,12 +159,13 @@ const handleLogin = async () => {
 
 // --- PROFILE UPDATING (WHEN USER IS SIGNED IN)
 // Get current profile data
-if (user.value) {
+const user_for_updating = useSupabaseUser();
+if (user_for_updating.value) {
   loading.value = true;
   let { data } = await supabase
     .from("profiles")
     .select(`username, website, avatar_url`)
-    .eq("id", user.value.id)
+    .eq("id", user_for_updating.value.id)
     .single();
   if (data) {
     username.value = data.username;
