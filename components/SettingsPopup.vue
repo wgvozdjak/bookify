@@ -159,29 +159,26 @@ const handleLogin = async () => {
 
 // --- PROFILE UPDATING (WHEN USER IS SIGNED IN)
 // Get current profile data
-const user_for_updating = useSupabaseUser();
-
 supabase.auth.onAuthStateChange((event, session) => {
-  console.log(event, session);
-  console.log("---------------");
-  console.log(user_for_updating.value);
-  const another_user = useSupabaseUser();
-  console.log(another_user.value);
-  console.log("---------------");
-  if (user_for_updating.value) {
-    console.log("here");
-    /*loading.value = true;
-    let { data } = await supabase
-      .from("profiles")
-      .select(`username, website, avatar_url`)
-      .eq("id", user_for_updating.value.id)
-      .single();
-    if (data) {
-      username.value = data.username;
-      website.value = data.website;
-      avatar_path.value = data.avatar_url;
-    }
-    loading.value = false;*/
+  if (event == "SIGNED_IN") {
+    const timer = setInterval(async () => {
+      const user_for_updating = useSupabaseUser();
+      if (user_for_updating) {
+        clearInterval(timer);
+        loading.value = true;
+        let { data } = await supabase
+          .from("profiles")
+          .select(`username, website, avatar_url`)
+          .eq("id", user_for_updating.value.id)
+          .single();
+        if (data) {
+          username.value = data.username;
+          website.value = data.website;
+          avatar_path.value = data.avatar_url;
+        }
+        loading.value = false;
+      }
+    }, 100)
   }
 })
 
