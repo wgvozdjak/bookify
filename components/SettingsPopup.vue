@@ -183,8 +183,6 @@ supabase.auth.onAuthStateChange((event, session) => {
 });
 
 if (user.value) {
-  console.log("User:");
-  console.log(user.value);
   loading.value = true;
   let { data } = await supabase
     .from("profiles")
