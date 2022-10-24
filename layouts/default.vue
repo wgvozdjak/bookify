@@ -3,20 +3,20 @@
     <NavigationBar @settings-clicked="openSettings" />
     <div class="mx-auto w-full max-w-screen-2xl px-6"><slot /></div>
     <Footer class="mt-auto" />
-    <SettingsPopup ref="settingsPopup" />
+    <SettingsPopup2 ref="settingsPopup" />
   </div>
 </template>
 
 <script>
 import Footer from "../components/Footer.vue";
 import NavigationBar from "../components/NavigationBar.vue";
-import SettingsPopup from "../components/SettingsPopup.vue";
+import SettingsPopup2 from "../components/SettingsPopup2.vue";
 
 export default {
   components: {
     NavigationBar,
     Footer,
-    SettingsPopup,
+    SettingsPopup2,
   },
   methods: {
     openSettings() {
