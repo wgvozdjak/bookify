@@ -3,6 +3,9 @@
     <!-- welcome message -->
     <div>hi there! welcome to bookify 👋</div>
 
+    <button @click="addBook">add a book</button>
+    <AddBookPopup ref="addBookPopup"></AddBookPopup>
+
     <!-- main content -->
     <div class="mt-4 flex w-full flex-row gap-4">
       <!-- table of books read -->
@@ -264,6 +267,8 @@
 </template>
 
 <script>
+import AddBookPopup from "../components/home/AddBookPopup.vue";
+
 export default {
   data() {
     return {
@@ -293,6 +298,12 @@ export default {
         .eq("id", this.user.id);
       console.log(titles);*/
     },
+    addBook() {
+      this.$refs.addBookPopup.openPopup();
+    },
+  },
+  components: {
+    AddBookPopup,
   },
 };
 </script>

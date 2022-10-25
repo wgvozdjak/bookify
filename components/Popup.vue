@@ -29,7 +29,7 @@
 <script setup>
 defineExpose({ openPopup });
 
-let isVisible = ref(true);
+let isVisible = ref(false);
 function closePopup() {
   isVisible.value = false;
 }
