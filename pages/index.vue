@@ -3,7 +3,7 @@
     <!-- welcome message -->
     <div>hi there! welcome to bookify 👋</div>
 
-    <button @click="addBook">add a book</button>
+    <button @click="openAddBookPopup">add a book</button>
     <AddBookPopup ref="addBookPopup"></AddBookPopup>
 
     <!-- main content -->
@@ -12,21 +12,6 @@
       <div class="flex basis-1/2 flex-col">
         <div>
           <div>books read</div>
-          <form v-if="user">
-            <input
-              class="mr-5 border-2 border-solid border-black px-2 py-1"
-              type="text"
-              id="title"
-              name="title"
-              v-model="title"
-            />
-            <input
-              class="cursor-pointer border-2 border-solid border-gray-600 px-2 py-1 hover:bg-gray-100 active:bg-gray-200"
-              type="submit"
-              value="Submit"
-              @click="addTitle"
-            />
-          </form>
         </div>
         <div
           class="books-read-table mt-2 flex flex-1 border-separate border-spacing-0 flex-col rounded-2xl border-2 border-solid border-black"
@@ -271,34 +256,10 @@ import AddBookPopup from "../components/home/AddBookPopup.vue";
 
 export default {
   data() {
-    return {
-      supabase: useSupabaseClient(),
-      user: useSupabaseUser(),
-      title: "",
-      loading: false,
-    };
+    return {};
   },
   methods: {
-    async addTitle() {
-      this.loading = true;
-      console.log(this.user);
-
-      // TODO: book_titles currently is just a text string containing just the last book read. decide on best way to represent all books read
-      const { error } = await this.supabase
-        .from("profiles")
-        .update({
-          book_titles: this.title,
-        })
-        .eq("id", this.user.id);
-
-      // the below code is to just check whether the above updating actually works
-      /*const { titles, get_error } = await this.supabase
-        .from("profiles")
-        .select("book_titles")
-        .eq("id", this.user.id);
-      console.log(titles);*/
-    },
-    addBook() {
+    openAddBookPopup() {
       this.$refs.addBookPopup.openPopup();
     },
   },
