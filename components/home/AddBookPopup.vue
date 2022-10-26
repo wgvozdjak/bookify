@@ -2,7 +2,7 @@
   <Popup ref="popup">
     <template #header>add a book</template>
     <template #default>
-      <form class="space-y-6">
+      <form class="space-y-6" @submit.prevent="addTitle">
         <div>
           <label for="title" class="block">book title</label>
           <div class="mt-1">
@@ -20,7 +20,6 @@
           <button
             type="submit"
             class="flex w-full justify-center rounded-md border border-transparent bg-sky-500 py-2 px-4 font-medium text-white shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
-            @click="addTitle"
           >
             add book
           </button>
@@ -44,6 +43,8 @@ const user = useSupabaseUser();
 const title = ref("");
 
 async function addTitle() {
+  popup.value.closePopup();
+
   // TODO: book_titles currently is just a text string containing just the last book read. decide on best way to represent all books read
   const { error } = await supabase
     .from("profiles")

@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-defineExpose({ openPopup });
+defineExpose({ openPopup, closePopup });
 
 let isVisible = ref(false);
 function closePopup() {
