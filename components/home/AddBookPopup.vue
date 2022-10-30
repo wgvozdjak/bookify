@@ -46,12 +46,22 @@ async function addTitle() {
   popup.value.closePopup();
 
   // TODO: book_titles currently is just a text string containing just the last book read. decide on best way to represent all books read
-  const { error } = await supabase
-    .from("profiles")
-    .update({
-      book_titles: title.value,
+  const { data, error } = await supabase
+    .from("books")
+    .insert({
+      title: title.value,
     })
-    .eq("id", user.value.id);
+    .select();
+
+  console.log(data);
+
+  const added_book_id = data[0].book_id;
+  console.log(added_book_id);
+
+  const { books_read_error } = await supabase.from("books_read").insert({
+    id: user.value.id,
+    book_id: added_book_id,
+  });
 
   // the below code is to just check whether the above updating actually works
   /*const { titles, get_error } = await this.supabase
