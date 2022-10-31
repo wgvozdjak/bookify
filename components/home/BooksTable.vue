@@ -65,6 +65,20 @@ const books = ref([
     tags: "magic, fantasy, fiction",
   },
 ]);
+
+const supabase = useSupabaseClient();
+const user = useSupabaseUser();
+
+if (user) {
+  const id = user.value.id;
+
+  // TODO: add row-level security that only allows a user to select rows that are attached to their user id
+  const { data, error } = await supabase.from("books_read").select();
+
+  for (row of data) {
+    const book_id = data.book_id;
+  }
+}
 </script>
 
 <style>
