@@ -90,9 +90,25 @@ async function get_books() {
   }
 }
 
+let receivedBooks = false;
 if (user.value) {
-  const id = user.value.id;
+  getBookList(user.value.id);
+} else {
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (!receivedBooks && event == "SIGNED_IN") {
+      const timer = setInterval(async () => {
+        const updated_user = useSupabaseUser();
+        if (updated_user.value) {
+          clearInterval(timer);
+          getBookList(updated_user.value.id);
+          receivedBooks = true;
+        }
+      }, 100);
+    }
+  });
+}
 
+function getBookList(user_id) {
   // TODO: add row-level security that only allows a user to select rows that are attached to their user id
   Promise.all([get_books_read(), get_books()]).then((values) => {
     const books_read = values[0];
@@ -101,7 +117,7 @@ if (user.value) {
     // TODO: optimization by sorting rather than this bad n^2 algorithm
     for (let book_read of books_read) {
       for (let book of books) {
-        if (id == book_read.id && book_read.book_id == book.book_id) {
+        if (user_id == book_read.id && book_read.book_id == book.book_id) {
           books_list.value.push({
             date: "11/2/2022",
             title: book.title,
@@ -115,15 +131,14 @@ if (user.value) {
   });
 }
 
-function addBook(val /*book_info, book_user_info*/) {
-  console.log(val);
-  /*books_list.value.push({
+function addBook(book_info, book_user_info) {
+  books_list.value.push({
     date: "11/2/2022",
     title: book_info.title,
     author: book_info.author + " (currently not available)",
     rating: 3,
     tags: "this is a test",
-  });*/
+  });
 }
 </script>
 

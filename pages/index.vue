@@ -113,9 +113,8 @@ export default {
     openAddBookPopup() {
       this.$refs.addBookPopup.openPopup();
     },
-    bookAdded(val) {
-      console.log("a book was added");
-      this.$refs.booksTable.addBook(val);
+    bookAdded(book_info, book_user_info) {
+      this.$refs.booksTable.addBook(book_info, book_user_info);
     },
   },
   components: {

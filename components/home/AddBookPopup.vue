@@ -81,23 +81,9 @@ async function addTitle() {
     const added_book_id = book_data[0].book_id;
     const insertToReadBooksPromise = insertToReadBooks(added_book_id);
     insertToReadBooksPromise.then((read_book_data) => {
-      console.log("emitting");
-      emit("bookAdded", "test" /*book_data, read_book_data*/);
+      emit("bookAdded", book_data[0], read_book_data[0]);
     });
   });
-
-  /*console.log(data);
-
-  const added_book_id = data[0].book_id;
-  console.log(added_book_id);
-
-  const { data, error } = await supabase
-    .from("books_read")
-    .insert({
-      id: user.value.id,
-      book_id: added_book_id,
-    })
-    .select();*/
 
   // the below code is to just check whether the above updating actually works
   /*const { titles, get_error } = await this.supabase
