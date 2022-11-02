@@ -9,7 +9,7 @@
       <div class="th">rating</div>
       <div class="th">tags</div>
     </div>
-    <div class="tr" v-for="book in books">
+    <div class="tr" v-for="book in books_list">
       <div class="td">{{ book.date }}</div>
       <div class="td">{{ book.title }}</div>
       <div class="td">{{ book.author }}</div>
@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-const books = ref([
+const books_hardcoded = ref([
   {
     date: "october 22, 2022",
     title: "harry potter 1",
@@ -66,18 +66,64 @@ const books = ref([
   },
 ]);
 
+defineExpose({ addBook });
+
+const books_list = ref([]);
+
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 
-if (user) {
+async function get_books_read() {
+  try {
+    const { data, error } = await supabase.from("books_read").select();
+    return data;
+  } catch (error) {
+    console.log("error", error);
+  }
+}
+async function get_books() {
+  try {
+    const { data, error } = await supabase.from("books").select();
+    return data;
+  } catch (error) {
+    console.log("error", error);
+  }
+}
+
+if (user.value) {
   const id = user.value.id;
 
   // TODO: add row-level security that only allows a user to select rows that are attached to their user id
-  const { data, error } = await supabase.from("books_read").select();
+  Promise.all([get_books_read(), get_books()]).then((values) => {
+    const books_read = values[0];
+    const books = values[1];
 
-  for (row of data) {
-    const book_id = data.book_id;
-  }
+    // TODO: optimization by sorting rather than this bad n^2 algorithm
+    for (let book_read of books_read) {
+      for (let book of books) {
+        if (id == book_read.id && book_read.book_id == book.book_id) {
+          books_list.value.push({
+            date: "11/2/2022",
+            title: book.title,
+            author: book.author + " (currently not available)",
+            rating: 3,
+            tags: "this is a test",
+          });
+        }
+      }
+    }
+  });
+}
+
+function addBook(val /*book_info, book_user_info*/) {
+  console.log(val);
+  /*books_list.value.push({
+    date: "11/2/2022",
+    title: book_info.title,
+    author: book_info.author + " (currently not available)",
+    rating: 3,
+    tags: "this is a test",
+  });*/
 }
 </script>
 

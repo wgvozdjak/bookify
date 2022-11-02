@@ -41,27 +41,63 @@ const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 
 const title = ref("");
+const emit = defineEmits(["bookAdded"]);
+
+async function insertToBooks() {
+  try {
+    const { data, error } = await supabase
+      .from("books")
+      .insert({
+        title: title.value,
+      })
+      .select();
+    return data;
+  } catch (error) {
+    console.log("error", error);
+  }
+}
+
+async function insertToReadBooks(added_book_id) {
+  try {
+    const { data, error } = await supabase
+      .from("books_read")
+      .insert({
+        id: user.value.id,
+        book_id: added_book_id,
+      })
+      .select();
+    return data;
+  } catch (error) {
+    console.log("error", error);
+  }
+}
 
 async function addTitle() {
   popup.value.closePopup();
 
   // TODO: book_titles currently is just a text string containing just the last book read. decide on best way to represent all books read
-  const { data, error } = await supabase
-    .from("books")
-    .insert({
-      title: title.value,
-    })
-    .select();
+  const insertToBooksPromise = insertToBooks();
+  insertToBooksPromise.then((book_data) => {
+    const added_book_id = book_data[0].book_id;
+    const insertToReadBooksPromise = insertToReadBooks(added_book_id);
+    insertToReadBooksPromise.then((read_book_data) => {
+      console.log("emitting");
+      emit("bookAdded", "test" /*book_data, read_book_data*/);
+    });
+  });
 
-  console.log(data);
+  /*console.log(data);
 
   const added_book_id = data[0].book_id;
   console.log(added_book_id);
 
-  const { books_read_error } = await supabase.from("books_read").insert({
-    id: user.value.id,
-    book_id: added_book_id,
-  });
+  const { data, error } = await supabase
+    .from("books_read")
+    .insert({
+      id: user.value.id,
+      book_id: added_book_id,
+    })
+    .select();*/
 
   // the below code is to just check whether the above updating actually works
   /*const { titles, get_error } = await this.supabase

@@ -4,7 +4,7 @@
     <div>hi there! welcome to bookify 👋</div>
 
     <button @click="openAddBookPopup">add a book</button>
-    <AddBookPopup ref="addBookPopup"></AddBookPopup>
+    <AddBookPopup ref="addBookPopup" @bookAdded="bookAdded"></AddBookPopup>
 
     <!-- main content -->
     <div class="mt-4 flex w-full flex-row gap-4">
@@ -13,7 +13,7 @@
         <div>
           <div>books read</div>
         </div>
-        <BooksTable></BooksTable>
+        <BooksTable ref="booksTable"></BooksTable>
       </div>
 
       <!-- books read graph -->
@@ -112,6 +112,10 @@ export default {
   methods: {
     openAddBookPopup() {
       this.$refs.addBookPopup.openPopup();
+    },
+    bookAdded(val) {
+      console.log("a book was added");
+      this.$refs.booksTable.addBook(val);
     },
   },
   components: {
