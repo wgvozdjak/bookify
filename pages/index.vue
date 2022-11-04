@@ -1,24 +1,26 @@
 <template>
   <div class="flex flex-col items-center">
-    <!-- welcome message -->
-    <div>hi there! welcome to bookify 👋</div>
-
-    <button @click="openAddBookPopup">add a book</button>
     <AddBookPopup ref="addBookPopup" @bookAdded="bookAdded"></AddBookPopup>
 
+    <!-- welcome message -->
+    <div class="mt-12 text-2xl font-bold">hi there! welcome to bookify 👋</div>
+
     <!-- main content -->
-    <div class="mt-4 flex w-full flex-row gap-4">
+    <div id="main" class="mt-12 flex w-full flex-row gap-4">
       <!-- table of books read -->
       <div class="flex basis-1/2 flex-col">
         <div>
-          <div>books read</div>
+          <div class="inline-block font-bold">books read</div>
+          <button @click="openAddBookPopup" class="ml-4 inline-block">
+            add a book
+          </button>
         </div>
         <BooksTable ref="booksTable"></BooksTable>
       </div>
 
       <!-- books read graph -->
       <div class="flex basis-1/2 flex-col">
-        <div>2022 book chart</div>
+        <div class="font-bold">2022 book chart</div>
         <div>
           <img
             src="https://via.placeholder.com/500x350.png?text=placeholder+for+books+read+graph"
@@ -28,15 +30,15 @@
     </div>
 
     <!-- other features -->
-    <div class="mt-8 flex w-full flex-col">
+    <div class="mt-12 flex w-full flex-col">
       <!-- header -->
-      <div class="mx-auto">other features</div>
+      <div class="mx-auto mb-6">other features</div>
 
       <!-- buttons -->
-      <div class="mb-8 flex w-full flex-row justify-between">
+      <div class="mx-auto mb-8 flex w-1/2 flex-row justify-between">
         <NuxtLink
           to="/"
-          class="inline-block w-1/5 rounded-2xl border-2 border-solid border-black px-4 py-2"
+          class="inline-block w-1/4 rounded-2xl border-2 border-solid border-black px-4 py-2"
         >
           data
           <svg
@@ -57,7 +59,7 @@
 
         <NuxtLink
           to="/"
-          class="inline-block w-1/5 rounded-2xl border-2 border-solid border-black px-4 py-2"
+          class="inline-block w-1/4 rounded-2xl border-2 border-solid border-black px-4 py-2"
         >
           recommendations
           <svg
@@ -78,7 +80,7 @@
 
         <NuxtLink
           to="/"
-          class="inline-block w-1/5 rounded-2xl border-2 border-solid border-black px-4 py-2"
+          class="inline-block w-1/4 rounded-2xl border-2 border-solid border-black px-4 py-2"
         >
           isbn to goodreads
           <svg
@@ -152,5 +154,10 @@ export default {
 
 .books-read-table .tr:last-child {
   @apply flex-1;
+}
+
+body {
+  background-image: url("assets/background.svg");
+  background-size: 100% 100%;
 }
 </style>

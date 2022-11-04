@@ -3,7 +3,7 @@ module.exports = {
   content: [],
   theme: {
     fontFamily: {
-      sans: ['"DM Sans"', "sans-serif"],
+      sans: ['"Inter"', "sans-serif"],
     },
     extend: {
       fontFamily: {

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="books-read-table mt-2 flex flex-1 border-separate border-spacing-0 flex-col rounded-2xl border-2 border-solid border-black"
+    class="books-read-table mt-2 flex flex-1 border-separate border-spacing-0 flex-col rounded-2xl border-2 border-solid border-black bg-white shadow-lg"
   >
     <div class="tr">
       <div class="th">date</div>
