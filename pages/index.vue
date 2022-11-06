@@ -23,7 +23,8 @@
         <div class="font-bold">2022 book chart</div>
         <div>
           <img
-            src="https://via.placeholder.com/500x350.png?text=placeholder+for+books+read+graph"
+            src="https://via.placeholder.com/550x350.png?text=placeholder+for+books+read+graph"
+            class="mt-2 w-full rounded-2xl border-2 border-solid border-black shadow-lg"
           />
         </div>
       </div>
@@ -35,10 +36,11 @@
       <div class="mx-auto mb-6">other features</div>
 
       <!-- buttons -->
-      <div class="mx-auto mb-8 flex w-1/2 flex-row justify-between">
+      <div class="mx-auto mb-8 flex flex-row gap-4">
+        <!-- transition-all duration-100 hover:mb-2 hover:-mt-1 -->
         <NuxtLink
           to="/"
-          class="inline-block w-1/4 rounded-2xl border-2 border-solid border-black px-4 py-2"
+          class="mt-0 inline-block w-60 rounded-2xl border-2 border-solid border-black bg-white px-4 py-2 shadow-md"
         >
           data
           <svg
@@ -59,7 +61,7 @@
 
         <NuxtLink
           to="/"
-          class="inline-block w-1/4 rounded-2xl border-2 border-solid border-black px-4 py-2"
+          class="inline-block w-60 rounded-2xl border-2 border-solid border-black px-4 py-2 shadow-md"
         >
           recommendations
           <svg
@@ -80,7 +82,7 @@
 
         <NuxtLink
           to="/"
-          class="inline-block w-1/4 rounded-2xl border-2 border-solid border-black px-4 py-2"
+          class="inline-block w-60 rounded-2xl border-2 border-solid border-black px-4 py-2 shadow-md"
         >
           isbn to goodreads
           <svg

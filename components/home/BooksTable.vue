@@ -73,23 +73,6 @@ const books_list = ref([]);
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 
-async function get_books_read() {
-  try {
-    const { data, error } = await supabase.from("books_read").select();
-    return data;
-  } catch (error) {
-    console.log("error", error);
-  }
-}
-async function get_books() {
-  try {
-    const { data, error } = await supabase.from("books").select();
-    return data;
-  } catch (error) {
-    console.log("error", error);
-  }
-}
-
 let receivedBooks = false;
 if (user.value) {
   getBookList(user.value.id);
@@ -108,27 +91,21 @@ if (user.value) {
   });
 }
 
-function getBookList(user_id) {
+async function getBookList(user_id) {
   // TODO: add row-level security that only allows a user to select rows that are attached to their user id
-  Promise.all([get_books_read(), get_books()]).then((values) => {
-    const books_read = values[0];
-    const books = values[1];
-
-    // TODO: optimization by sorting rather than this bad n^2 algorithm
-    for (let book_read of books_read) {
-      for (let book of books) {
-        if (user_id == book_read.id && book_read.book_id == book.book_id) {
-          books_list.value.push({
-            date: "11/2/2022",
-            title: book.title,
-            author: book.author + " (currently not available)",
-            rating: 3,
-            tags: "this is a test",
-          });
-        }
-      }
-    }
+  const { data, error } = await supabase.rpc("list_books_by_user", {
+    user_id: user_id,
   });
+
+  for (let book of data) {
+    books_list.value.push({
+      date: "11/2/2022",
+      title: book.title,
+      author: "(currently not available)",
+      rating: 3,
+      tags: "this is a test",
+    });
+  }
 }
 
 function addBook(book_info, book_user_info) {
