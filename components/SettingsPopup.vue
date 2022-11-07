@@ -34,7 +34,7 @@
       >
         <div class="relative">
           <input
-            class="peer w-full border-0 border-b-2 border-gray-200 bg-white px-0 py-2 placeholder-transparent focus:border-sky-500 focus:outline-none focus:ring-0 disabled:text-gray-400"
+            class="peer rounded-none border-0 border-b-2 border-gray-200 bg-white px-0 py-2 placeholder-transparent focus:border-violet-500 focus:outline-none focus:ring-0 disabled:text-gray-400"
             id="email"
             placeholder="email"
             type="text"
@@ -43,13 +43,13 @@
           />
           <label
             for="email"
-            class="absolute left-0 -top-3.5 cursor-text text-sm text-sky-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-sky-500"
+            class="absolute left-0 -top-3.5 cursor-text text-sm text-violet-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-violet-500"
             >email</label
           >
         </div>
         <div class="relative">
           <input
-            class="peer w-full border-0 border-b-2 border-gray-200 bg-white px-0 py-2 placeholder-transparent focus:border-sky-500 focus:outline-none focus:ring-0"
+            class="peer rounded-none border-0 border-b-2 border-gray-300 bg-white px-0 py-2 placeholder-transparent shadow-none focus:border-violet-500 focus:outline-none focus:ring-0"
             id="username"
             type="text"
             placeholder="username"
@@ -57,13 +57,13 @@
           />
           <label
             for="username"
-            class="absolute left-0 -top-3.5 cursor-text text-sm text-sky-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-sky-500"
+            class="absolute left-0 -top-3.5 cursor-text text-sm text-violet-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-violet-500"
             >username</label
           >
         </div>
         <div class="relative">
           <input
-            class="peer w-full border-0 border-b-2 border-gray-200 bg-white px-0 py-2 placeholder-transparent focus:border-sky-500 focus:outline-none focus:ring-0"
+            class="peer w-full border-0 border-b-2 border-gray-200 bg-white px-0 py-2 placeholder-transparent focus:border-violet-500 focus:outline-none focus:ring-0"
             id="website"
             type="text"
             placeholder="website"
@@ -71,7 +71,7 @@
           />
           <label
             for="website"
-            class="absolute left-0 -top-3.5 cursor-text text-sm text-sky-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-sky-500"
+            class="absolute left-0 -top-3.5 cursor-text text-sm text-violet-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-violet-500"
             >website</label
           >
         </div>
@@ -79,13 +79,13 @@
         <div class="flex w-full flex-row gap-4">
           <input
             type="submit"
-            class="basis-1/2 cursor-pointer justify-center rounded-lg bg-sky-500 py-2 font-medium text-white transition hover:bg-sky-400"
+            class="basis-1/2 cursor-pointer justify-center rounded-lg bg-violet-500 py-2 font-medium text-white transition hover:bg-violet-400"
             :value="loading ? 'loading ...' : 'update'"
             :disabled="loading"
           />
 
           <button
-            class="basis-1/2 cursor-pointer justify-center rounded-lg bg-sky-500 py-2 font-medium text-white transition hover:bg-sky-400"
+            class="basis-1/2 cursor-pointer justify-center rounded-lg bg-violet-500 py-2 font-medium text-white transition hover:bg-violet-400"
             @click="signOut"
             :disabled="loading"
           >
