@@ -34,7 +34,7 @@
       >
         <div class="relative">
           <input
-            class="peer rounded-none border-0 border-b-2 border-gray-200 bg-white px-0 py-2 placeholder-transparent focus:border-violet-500 focus:outline-none focus:ring-0 disabled:text-gray-400"
+            class="peer rounded-none border-0 border-b-2 border-gray-300 bg-white px-0 py-2 placeholder-transparent shadow-none focus:border-violet-500 focus:outline-none focus:ring-0 disabled:text-gray-400"
             id="email"
             placeholder="email"
             type="text"
@@ -47,34 +47,8 @@
             >email</label
           >
         </div>
-        <div class="relative">
-          <input
-            class="peer rounded-none border-0 border-b-2 border-gray-300 bg-white px-0 py-2 placeholder-transparent shadow-none focus:border-violet-500 focus:outline-none focus:ring-0"
-            id="username"
-            type="text"
-            placeholder="username"
-            v-model="username"
-          />
-          <label
-            for="username"
-            class="absolute left-0 -top-3.5 cursor-text text-sm text-violet-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-violet-500"
-            >username</label
-          >
-        </div>
-        <div class="relative">
-          <input
-            class="peer w-full border-0 border-b-2 border-gray-200 bg-white px-0 py-2 placeholder-transparent focus:border-violet-500 focus:outline-none focus:ring-0"
-            id="website"
-            type="text"
-            placeholder="website"
-            v-model="website"
-          />
-          <label
-            for="website"
-            class="absolute left-0 -top-3.5 cursor-text text-sm text-violet-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-violet-500"
-            >website</label
-          >
-        </div>
+        <FormInputElement v-model="username" content="username" />
+        <FormInputElement v-model="website" content="website" />
 
         <div class="flex w-full flex-row gap-4">
           <input

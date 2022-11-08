@@ -1,0 +1,30 @@
+<template>
+  <div class="relative">
+    <input
+      class="peer rounded-none border-0 border-b-2 border-gray-300 bg-white px-0 py-2 placeholder-transparent shadow-none focus:border-violet-500 focus:outline-none focus:ring-0 disabled:text-gray-400"
+      :id="content"
+      type="text"
+      :placeholder="content"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
+      :disabled="disabled"
+    />
+    <label
+      :for="content"
+      class="absolute left-0 -top-3.5 cursor-text text-sm text-violet-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-violet-500"
+      >{{ content }}</label
+    >
+  </div>
+</template>
+
+<script setup>
+const props = defineProps({
+  modelValue: String,
+  content: String,
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+});
+defineEmits(["update:modelValue"]);
+</script>
