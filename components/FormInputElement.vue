@@ -1,3 +1,17 @@
+<!--
+  Usage:
+    <FormInputElement />
+  Props:
+    content: input label (what the input is for), REQUIRED
+    v-model: typical v-model usage, OPTIONAL
+    value: initial value, OPTIONAL
+    disabled, true/false disable input, OPTIONAL (default false)
+  Other:
+    If v-model exists, it is used as the value of the input. If it doesn't but value does, value is used as the initial value
+    of the input. If neither of them exist, no default value is provided for the input.
+
+-->
+
 <template>
   <div class="relative">
     <input
@@ -5,7 +19,7 @@
       :id="content"
       type="text"
       :placeholder="content"
-      :value="modelValue"
+      :value="modelValue ? modelValue : value ? value : ''"
       @input="$emit('update:modelValue', $event.target.value)"
       :disabled="disabled"
     />
@@ -19,11 +33,18 @@
 
 <script setup>
 const props = defineProps({
-  modelValue: String,
+  modelValue: {
+    String,
+    default: null,
+  },
   content: String,
   disabled: {
     type: Boolean,
     default: false,
+  },
+  value: {
+    type: String,
+    default: null,
   },
 });
 defineEmits(["update:modelValue"]);

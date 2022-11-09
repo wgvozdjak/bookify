@@ -29,24 +29,14 @@
       <!-- Currently interacts weirdly with global form CSS in assets/global.css -->
       <form
         v-else
-        class="mt-4 flex w-full flex-col gap-10"
+        class="mt-4 flex w-full flex-col gap-6"
         @submit.prevent="updateProfile"
       >
-        <div class="relative">
-          <input
-            class="peer rounded-none border-0 border-b-2 border-gray-300 bg-white px-0 py-2 placeholder-transparent shadow-none focus:border-violet-500 focus:outline-none focus:ring-0 disabled:text-gray-400"
-            id="email"
-            placeholder="email"
-            type="text"
-            :value="user.email"
-            disabled
-          />
-          <label
-            for="email"
-            class="absolute left-0 -top-3.5 cursor-text text-sm text-violet-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-violet-500"
-            >email</label
-          >
-        </div>
+        <FormInputElement
+          :value="user.email"
+          content="email"
+          :disabled="true"
+        />
         <FormInputElement v-model="username" content="username" />
         <FormInputElement v-model="website" content="website" />
 
