@@ -3,18 +3,7 @@
     <template #header>add a book</template>
     <template #default>
       <form class="space-y-6" @submit.prevent="addTitle">
-        <div>
-          <label for="title" class="block">book title</label>
-          <div class="mt-1">
-            <input
-              class=""
-              type="text"
-              id="title"
-              name="title"
-              v-model="title"
-            />
-          </div>
-        </div>
+        <FormInputElement v-model="title" content="book title" />
 
         <div>
           <button
@@ -31,6 +20,8 @@
 
 <script setup>
 import { ref } from "vue";
+import FormInputElement from "../forms/FormInputElement.vue";
+
 const popup = ref(null);
 defineExpose({ openPopup });
 function openPopup() {

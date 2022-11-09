@@ -14,7 +14,7 @@
       <div
         class="bg-solid flex w-[425px] flex-col rounded-3xl border-2 border-solid border-black bg-white p-6 shadow-xl"
       >
-        <div class="mb-4 flex w-full flex-row justify-between">
+        <div class="mb-6 flex w-full flex-row justify-between">
           <h1 class="text-xl font-bold"><slot name="header"></slot></h1>
           <button class="text-xl" @click="closePopup" type="button">
             &#x2715;

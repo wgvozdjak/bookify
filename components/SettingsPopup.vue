@@ -1,25 +1,18 @@
 <template>
   <Popup ref="popup">
-    <template #header>bookify settings</template>
+    <template #header v-if="!user">sign in with magic link</template>
+    <template #header v-else>bookify settings</template>
     <template #default>
       <form v-if="!user" @submit.prevent="handleLogin" class="w-full">
-        <div class="flex w-full flex-col gap-3">
-          <div class="flex w-full flex-col gap-1">
-            <h2>Sign in with magic link</h2>
+        <div class="flex w-full flex-col gap-6">
+          <FormInputElement v-model="email" content="email" />
+          <div>
             <input
-              class="w-full rounded-md border-2 border-solid border-gray-300 p-1"
-              type="email"
-              placeholder="Your email"
-              v-model="email"
+              type="submit"
+              class="w-full cursor-pointer justify-center rounded-lg bg-violet-500 py-2 font-medium text-white transition hover:bg-violet-400"
+              :value="loading ? 'Loading' : 'Send magic link'"
+              :disabled="loading"
             />
-            <div>
-              <input
-                type="submit"
-                class="w-full cursor-pointer rounded-md border-2 border-solid border-gray-300 bg-gray-200 p-1 text-left hover:bg-gray-300 active:border-gray-400 active:bg-gray-400"
-                :value="loading ? 'Loading' : 'Send magic link'"
-                :disabled="loading"
-              />
-            </div>
           </div>
         </div>
       </form>
@@ -62,6 +55,8 @@
 </template>
 
 <script setup>
+import FormInputElement from "./forms/FormInputElement.vue";
+
 import { ref } from "vue";
 const popup = ref(null);
 defineExpose({ openPopup });
