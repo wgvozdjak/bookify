@@ -4,6 +4,15 @@
     <template #default>
       <form class="space-y-6" @submit.prevent="addTitle">
         <FormInputElement v-model="title" content="book title" />
+        <FormInputElement v-model="author" content="book author" />
+        <FormInputElement
+          v-model="rating"
+          content="book rating"
+          input-type="number"
+        />
+
+        <!-- TODO: limit rating to an integer between 1 and 5, inclusive -->
+        <!-- TODO: convert book rating to a hover-click 5-star input -->
 
         <div>
           <button
@@ -32,6 +41,8 @@ const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 
 const title = ref("");
+const author = ref("");
+const rating = ref("");
 const emit = defineEmits(["bookAdded"]);
 
 async function insertToBooks() {
@@ -40,6 +51,7 @@ async function insertToBooks() {
       .from("books")
       .insert({
         title: title.value,
+        author: author.value,
       })
       .select();
     return data;
@@ -50,11 +62,15 @@ async function insertToBooks() {
 
 async function insertToReadBooks(added_book_id) {
   try {
+    const date = new Date();
+    const date_isostring = date.toISOString();
     const { data, error } = await supabase
       .from("books_read")
       .insert({
         id: user.value.id,
         book_id: added_book_id,
+        rating: rating.value,
+        date: date_isostring,
       })
       .select();
     return data;

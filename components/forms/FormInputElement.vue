@@ -5,7 +5,8 @@
     content: input label (what the input is for), REQUIRED
     v-model: typical v-model usage, OPTIONAL
     value: initial value, OPTIONAL
-    disabled, true/false disable input, OPTIONAL (default false)
+    disabled: true/false disable input, OPTIONAL (default false)
+    input-type: type of inpyt, OPTIONAL (default text)
   Other:
     If v-model exists, it is used as the value of the input. If it doesn't but value does, value is used as the initial value
     of the input. If neither of them exist, no default value is provided for the input.
@@ -17,11 +18,11 @@
     <input
       class="peer rounded-none border-0 border-b-2 border-gray-300 bg-white px-0 py-2 placeholder-transparent shadow-none focus:border-violet-500 focus:outline-none focus:ring-0 disabled:text-gray-400"
       :id="content"
-      type="text"
       :placeholder="content"
       :value="modelValue ? modelValue : value ? value : ''"
       @input="$emit('update:modelValue', $event.target.value)"
       :disabled="disabled"
+      :type="inputType"
     />
     <label
       :for="content"
@@ -45,6 +46,10 @@ const props = defineProps({
   value: {
     type: String,
     default: null,
+  },
+  inputType: {
+    type: String,
+    default: "text",
   },
 });
 defineEmits(["update:modelValue"]);

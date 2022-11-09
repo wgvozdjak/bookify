@@ -98,22 +98,38 @@ async function getBookList(user_id) {
   });
 
   for (let book of data) {
+    const date = book.book_date;
+
+    // TODO: feels like a hacky way to do this? should the date object be a string object in the first place, or a date datatype?
+    const year = parseInt(date.substring(0, 4));
+    const month = parseInt(date.substring(5, 7));
+    const day = parseInt(date.substring(8, 10));
+    const date_parsed = month + "/" + day + "/" + year;
+
     books_list.value.push({
-      date: "11/2/2022",
+      date: date_parsed,
       title: book.title,
-      author: "(currently not available)",
-      rating: 3,
+      author: book.author,
+      rating: book.rating,
       tags: "this is a test",
     });
   }
 }
 
 function addBook(book_info, book_user_info) {
+  const date = book_user_info.date;
+
+  // TODO: feels like a hacky way to do this? should the date object be a string object in the first place, or a date datatype?
+  const year = parseInt(date.substring(0, 4));
+  const month = parseInt(date.substring(5, 7));
+  const day = parseInt(date.substring(8, 10));
+  const date_parsed = month + "/" + day + "/" + year;
+
   books_list.value.push({
-    date: "11/2/2022",
+    date: date_parsed,
     title: book_info.title,
-    author: book_info.author + " (currently not available)",
-    rating: 3,
+    author: book_info.author,
+    rating: book_user_info.rating,
     tags: "this is a test",
   });
 }
