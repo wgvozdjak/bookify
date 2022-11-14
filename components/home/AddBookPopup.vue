@@ -11,6 +11,12 @@
           input-type="number"
         />
 
+        <FormSelectElement
+          v-model="genre"
+          :options="['fantasy', 'science fiction', 'nonfiction']"
+          default-value="book genre"
+        />
+
         <!-- TODO: limit rating to an integer between 1 and 5, inclusive -->
         <!-- TODO: convert book rating to a hover-click 5-star input -->
 
@@ -30,6 +36,7 @@
 <script setup>
 import { ref } from "vue";
 import FormInputElement from "../forms/FormInputElement.vue";
+import FormSelectElement from "../forms/FormSelectElement.vue";
 
 const popup = ref(null);
 defineExpose({ openPopup });
@@ -43,6 +50,7 @@ const user = useSupabaseUser();
 const title = ref("");
 const author = ref("");
 const rating = ref("");
+const genre = ref("");
 const emit = defineEmits(["bookAdded"]);
 
 async function insertToBooks() {
@@ -52,6 +60,7 @@ async function insertToBooks() {
       .insert({
         title: title.value,
         author: author.value,
+        genre: genre.value,
       })
       .select();
     return data;

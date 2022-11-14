@@ -113,6 +113,8 @@ async function getBookList(user_id) {
       rating: book.rating,
       tags: "this is a test",
     });
+
+    // TODO: implement tags, both backend and frontend
   }
 }
 
