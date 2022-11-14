@@ -10,7 +10,7 @@
             <input
               type="submit"
               class="w-full cursor-pointer justify-center rounded-lg bg-violet-500 py-2 font-medium text-white transition hover:bg-violet-400"
-              :value="loading ? 'Loading' : 'Send magic link'"
+              :value="loading ? 'loading' : 'send magic link'"
               :disabled="loading"
             />
           </div>

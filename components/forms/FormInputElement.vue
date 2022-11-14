@@ -6,7 +6,7 @@
     v-model: typical v-model usage, OPTIONAL
     value: initial value, OPTIONAL
     disabled: true/false disable input, OPTIONAL (default false)
-    input-type: type of inpyt, OPTIONAL (default text)
+    input-type: type of input, OPTIONAL (default text)
   Other:
     If v-model exists, it is used as the value of the input. If it doesn't but value does, value is used as the initial value
     of the input. If neither of them exist, no default value is provided for the input.
