@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto flex min-h-screen flex-col justify-start">
     <NavigationBar @settings-clicked="openSettings" />
-    <div class="mx-auto w-full max-w-screen-2xl px-6"><slot /></div>
+    <div class="mx-auto w-full max-w-screen-xl px-6"><slot /></div>
     <!--<Footer class="mt-auto" />-->
     <SettingsPopup ref="settingsPopup" />
   </div>
@@ -25,3 +25,10 @@ export default {
   },
 };
 </script>
+
+<style>
+body {
+  background-image: url("assets/background.svg");
+  background-size: 100% 100%;
+}
+</style>

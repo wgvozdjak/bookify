@@ -157,9 +157,4 @@ export default {
 .books-read-table .tr:last-child {
   @apply flex-1;
 }
-
-body {
-  background-image: url("assets/background.svg");
-  background-size: 100% 100%;
-}
 </style>
