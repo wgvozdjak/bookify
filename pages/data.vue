@@ -38,5 +38,19 @@ const chartOptions = ref({
   },
   colors: ["a78bfa"],
   backgroundColor: "transparent",
+  tooltip: {
+    isHtml: true,
+  },
 });
+
+document.querySelector("div.google-visualization-tooltip").addEventListener;
 </script>
+
+<style>
+div.google-visualization-tooltip {
+  @apply rounded-lg;
+  @apply shadow-lg;
+  @apply opacity-0;
+  @apply transition;
+}
+</style>
