@@ -24,11 +24,10 @@
 import { GChart } from "vue-google-charts";
 
 const chartData = ref([
-  ["Year", "Sales"],
-  ["2014", 1000],
-  ["2015", 1170],
-  ["2016", 660],
-  ["2017", 1030],
+  ["genre", "number of books"],
+  ["fantasy", 12],
+  ["science fiction", 4],
+  ["nonfiction", 15],
 ]);
 
 const chartOptions = ref({
@@ -36,21 +35,31 @@ const chartOptions = ref({
     title: "Company Performance",
     subtitle: "Sales: 2014-2017",
   },
+  height: 400,
   colors: ["a78bfa"],
   backgroundColor: "transparent",
   tooltip: {
     isHtml: true,
+    trigger: "none",
+  },
+  enableInteractivity: false,
+  legend: {
+    position: "none",
+  },
+  vAxis: {
+    viewWindow: {
+      max: 20,
+      min: 0,
+    },
   },
 });
-
-document.querySelector("div.google-visualization-tooltip").addEventListener;
 </script>
 
 <style>
 div.google-visualization-tooltip {
   @apply rounded-lg;
   @apply shadow-lg;
-  @apply opacity-0;
+  /*@apply opacity-0;*/
   @apply transition;
 }
 </style>
