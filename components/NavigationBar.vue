@@ -1,7 +1,7 @@
 <!-- all the fonts used to be font-josefin -->
 
 <template>
-  <header class="bg-red w-full">
+  <header class="w-full">
     <div class="my-0 mx-auto flex w-full max-w-screen-xl py-4 px-2">
       <nav class="flex flex-1 items-center">
         <div class="flex">
