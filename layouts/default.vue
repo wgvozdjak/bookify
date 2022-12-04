@@ -1,9 +1,11 @@
 <template>
-  <div class="mx-auto flex min-h-screen flex-col justify-start">
-    <NavigationBar @settings-clicked="openSettings" />
-    <div class="mx-auto w-full max-w-screen-xl px-6"><slot /></div>
-    <!--<Footer class="mt-auto" />-->
-    <SettingsPopup ref="settingsPopup" />
+  <div id="wrapper" class="h-full w-full">
+    <div class="mx-auto flex min-h-screen flex-col justify-start">
+      <NavigationBar @settings-clicked="openSettings" />
+      <div class="mx-auto w-full max-w-screen-xl px-6"><slot /></div>
+      <!--<Footer class="mt-auto" />-->
+      <SettingsPopup ref="settingsPopup" />
+    </div>
   </div>
 </template>
 
@@ -27,8 +29,8 @@ export default {
 </script>
 
 <style>
-body {
-  background-image: url("assets/background.svg");
+#wrapper {
+  background-image: url("assets/background.png");
   background-size: 100% 100%;
 }
 </style>
