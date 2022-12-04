@@ -8,17 +8,14 @@
         </div>
         <div class="basis-1/2">
           <h2 class="mb-4">graphs and tables</h2>
-
           <GraphsDropdown ref="genreDropdown">
             <template #label>book genre distribution</template>
-            <template #default class="border-2 border-solid border-black">
-              <GChart
-                type="ColumnChart"
-                :data="chartData"
-                :options="chartOptions"
-                @ready="chartReady"
+            <template #default>
+              <Bar
+                :chart-options="chartOptions"
+                :chart-data="chartData"
+                :styles="fullHeight"
               />
-              <!-- :events="chartEvents" -->
             </template>
           </GraphsDropdown>
         </div>
@@ -29,57 +26,42 @@
 
 <script setup>
 import GraphsDropdown from "../components/data/GraphsDropdown.vue";
-import { GChart } from "vue-google-charts";
 
-const chartData = ref([
-  ["genre", "number of books"],
-  ["", 0],
-]);
+import { Bar } from "vue-chartjs";
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
 
+ChartJS.register(BarElement, CategoryScale, LinearScale);
+
+const chartData = ref({
+  labels: [],
+  datasets: [{ data: [] }],
+});
 const chartOptions = ref({
-  chart: {
-    title: "Company Performance",
-    subtitle: "Sales: 2014-2017",
-  },
-  height: 400,
-  colors: ["a78bfa"],
-  backgroundColor: "transparent",
-  tooltip: {
-    isHtml: true,
-    trigger: "none",
-  },
-  enableInteractivity: false,
-  legend: {
-    position: "none",
-  },
-  vAxis: {
-    viewWindow: {
-      //max: 20,
-      min: 0,
-    },
-    format: "#",
-    gridlines: {
-      multiple: 1,
-    },
-    minorGridlines: {
-      multiple: 1,
+  responsive: true,
+  maintainAspectRatio: false,
+  backgroundColor: "#a78bfa",
+  hover: { mode: null },
+  scale: {
+    y: {
+      ticks: {
+        stepSize: 1,
+      },
     },
   },
 });
 
-const genreDropdown = ref(null);
-function chartReady(chart, google) {
-  genreDropdown.value.closeDropdown();
-  chart.draw(chartData.value, chartOptions.value);
-}
+const fullHeight = ref({ height: "100%" });
 
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 
 const books_list = ref([]);
 const genre_counts = new Map();
-
-let max_genre_count = -1;
 
 // potential TODO: is there some sort of ``helper function'' idea in view that i can move this to?
 // because getBookList is also used in BooksTable and likely will be used elsewhere in the future
@@ -122,22 +104,16 @@ function getGenreData() {
       }
     }
 
-    // TODO: there's probably a better way to remove the dummy element of the content
-    // i could just remove it at the very beginning but then there's technically a short
-    // time period where there's nothing in the array
-    // i could also just remove it at the very end but then time complexity is bad
-    let index = 0;
+    let genres = [];
+    let counts = [];
     for (const [genre, count] of genre_counts) {
-      chartData.value.push([genre, count]);
-      if (count > max_genre_count) {
-        max_genre_count = count;
-      }
-
-      if (index == 0) {
-        chartData.value.splice(1, 1);
-      }
-      index++;
+      genres.push(genre);
+      counts.push(count);
     }
+    chartData.value = {
+      labels: genres.slice(),
+      datasets: [{ data: counts.slice() }],
+    };
   });
 }
 
@@ -162,12 +138,3 @@ if (user_loaded) {
   userLoaded();
 }
 </script>
-
-<style>
-div.google-visualization-tooltip {
-  @apply rounded-lg;
-  @apply shadow-lg;
-  /*@apply opacity-0;*/
-  @apply transition;
-}
-</style>

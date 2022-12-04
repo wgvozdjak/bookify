@@ -25,7 +25,7 @@
     <TransitionCollapseHeight>
       <div v-show="expanded">
         <!-- note to self: i don't think this padding thing is working -->
-        <div :class="{ 'p-2': loaded }">
+        <div class="h-96 p-12">
           <slot />
         </div>
       </div>
@@ -36,7 +36,7 @@
 <script setup>
 import TransitionCollapseHeight from "../TransitionCollapseHeight.vue";
 
-const expanded = ref(true);
+const expanded = ref(false);
 const loaded = ref(false);
 
 // ISSUE: GOOGLE CHART GETS SIZE TO DRAW FROM WRAPPER SIZE BUT
