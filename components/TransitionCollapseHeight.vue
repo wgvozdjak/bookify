@@ -80,7 +80,7 @@ export default {
 .enter-active,
 .leave-active {
   overflow: hidden;
-  transition: height 50ms linear;
+  transition: height 100ms linear;
 }
 
 .content {

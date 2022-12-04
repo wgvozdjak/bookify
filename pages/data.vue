@@ -9,13 +9,18 @@
         <div class="basis-1/2">
           <h2 class="mb-8">graphs and tables</h2>
 
-          <!--<GChart
-            type="ColumnChart"
-            :data="chartData"
-            :options="chartOptions"
-          />-->
-
-          <GraphsDropdown />
+          <GraphsDropdown ref="genreDropdown">
+            <template #label>book genre distribution</template>
+            <template #default class="border-2 border-solid border-black">
+              <GChart
+                type="ColumnChart"
+                :data="chartData"
+                :options="chartOptions"
+                @ready="chartReady"
+              />
+              <!-- :events="chartEvents" -->
+            </template>
+          </GraphsDropdown>
         </div>
       </div>
     </div>
@@ -25,7 +30,7 @@
 <script setup>
 import GraphsDropdown from "../components/data/GraphsDropdown.vue";
 import { GChart } from "vue-google-charts";
-/*
+
 const chartData = ref([
   ["genre", "number of books"],
   ["", 0],
@@ -61,6 +66,12 @@ const chartOptions = ref({
     },
   },
 });
+
+const genreDropdown = ref(null);
+function chartReady(chart, google) {
+  genreDropdown.value.closeDropdown();
+  chart.draw(chartData.value, chartOptions.value);
+}
 
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
@@ -151,7 +162,7 @@ supabase.auth.onAuthStateChange((event, session) => {
 
 if (user_loaded) {
   userLoaded();
-}*/
+}
 </script>
 
 <style>
