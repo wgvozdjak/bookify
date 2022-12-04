@@ -6,19 +6,20 @@
       <div class="th">date</div>
       <div class="th">title</div>
       <div class="th">author</div>
-      <!--<div class="th">rating</div>-->
+      <div class="th">rating</div>
       <!--<div class="th">tags</div>-->
     </div>
     <div class="tr" v-for="book in books_list">
       <div class="td">{{ book.date }}</div>
       <div class="td">{{ book.title }}</div>
       <div class="td">{{ book.author }}</div>
-      <!--<div class="td">
-        <div class="flex items-center">
+      <div class="td">
+        {{ book.rating }} / 5
+        <!--<div class="flex items-center">
           <div v-for="index in 5">
             <svg
               aria-hidden="true"
-              class="h-5 w-5 text-yellow-400"
+              class="h-3 w-3 text-yellow-400"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +31,7 @@
             </svg>
             <svg
               aria-hidden="true"
-              class="h-5 w-5 text-gray-300 dark:text-gray-500"
+              class="h-3 w-3 text-gray-300 dark:text-gray-500"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -41,8 +42,8 @@
               ></path>
             </svg>
           </div>
-        </div>
-      </div>-->
+        </div>-->
+      </div>
       <!--<div class="td">{{ book.tags }}</div>-->
     </div>
   </div>

@@ -8,12 +8,23 @@
         </div>
         <div class="basis-1/2">
           <h2 class="mb-4">graphs and tables</h2>
-          <GraphsDropdown ref="genreDropdown">
+          <GraphsDropdown class="mb-4">
             <template #label>book genre distribution</template>
             <template #default>
               <Bar
                 :chart-options="chartOptions"
-                :chart-data="chartData"
+                :chart-data="genreChartData"
+                :styles="fullHeight"
+              />
+            </template>
+          </GraphsDropdown>
+
+          <GraphsDropdown class="mb-4">
+            <template #label>book rating distribution</template>
+            <template #default>
+              <Bar
+                :chart-options="chartOptions"
+                :chart-data="ratingChartData"
                 :styles="fullHeight"
               />
             </template>
@@ -37,7 +48,11 @@ import {
 
 ChartJS.register(BarElement, CategoryScale, LinearScale);
 
-const chartData = ref({
+const genreChartData = ref({
+  labels: [],
+  datasets: [{ data: [] }],
+});
+const ratingChartData = ref({
   labels: [],
   datasets: [{ data: [] }],
 });
@@ -62,6 +77,7 @@ const user = useSupabaseUser();
 
 const books_list = ref([]);
 const genre_counts = new Map();
+const rating_counts = new Map();
 
 // potential TODO: is there some sort of ``helper function'' idea in view that i can move this to?
 // because getBookList is also used in BooksTable and likely will be used elsewhere in the future
@@ -92,33 +108,58 @@ async function getBookList(user_id) {
 }
 
 function getGenreData() {
-  getBookList(user.value.id).then(() => {
-    for (const book of books_list.value) {
-      const genre = book.genre;
-      // TODO: improve this algorithm? maybe just store counts in database directly
-      // also could have preset genres but that restricts user to those genres
-      if (genre_counts.has(genre)) {
-        genre_counts.set(genre, genre_counts.get(genre) + 1);
-      } else {
-        genre_counts.set(genre, 1);
-      }
+  for (const book of books_list.value) {
+    // TODO: do this with sql queries rather than JS bashing
+    const genre = book.genre;
+    // TODO: improve this algorithm? maybe just store counts in database directly
+    // also could have preset genres but that restricts user to those genres
+    if (genre_counts.has(genre)) {
+      genre_counts.set(genre, genre_counts.get(genre) + 1);
+    } else {
+      genre_counts.set(genre, 1);
     }
+  }
 
-    let genres = [];
-    let counts = [];
-    for (const [genre, count] of genre_counts) {
-      genres.push(genre);
-      counts.push(count);
+  let genres = [];
+  let counts = [];
+  for (const [genre, count] of genre_counts) {
+    genres.push(genre);
+    counts.push(count);
+  }
+  genreChartData.value = {
+    labels: genres.slice(),
+    datasets: [{ data: counts.slice() }],
+  };
+}
+
+// TODO: move this to getGenreData to create a general getData
+// to speed up things
+function getRatingData() {
+  for (const book of books_list.value) {
+    const rating = book.rating;
+    if (rating_counts.has(rating)) {
+      rating_counts.set(rating, rating_counts.get(rating) + 1);
+    } else {
+      rating_counts.set(rating, 1);
     }
-    chartData.value = {
-      labels: genres.slice(),
-      datasets: [{ data: counts.slice() }],
-    };
-  });
+  }
+
+  let ratings = [1, 2, 3, 4, 5];
+  let counts = [0, 0, 0, 0, 0];
+  for (const [rating, count] of rating_counts) {
+    counts[rating - 1] = count;
+  }
+  ratingChartData.value = {
+    labels: ratings.slice(),
+    datasets: [{ data: counts.slice() }],
+  };
 }
 
 function userLoaded() {
-  getGenreData();
+  getBookList(user.value.id).then(() => {
+    getGenreData();
+    getRatingData();
+  });
 }
 
 let user_loaded = false;
