@@ -24,9 +24,30 @@
 
     <TransitionCollapseHeight>
       <div v-show="expanded">
-        <!-- note to self: i don't think this padding thing is working -->
-        <div class="h-96 p-12">
-          <slot />
+        <div class="flex h-96 flex-col p-2">
+          <div>
+            <button
+              @click="firstContentShown = true"
+              :class="{ underline: firstContentShown }"
+              class="mr-2 py-1"
+            >
+              show graph
+            </button>
+            |
+            <button
+              @click="firstContentShown = false"
+              :class="{ underline: !firstContentShown }"
+              class="ml-2 py-1"
+            >
+              show table
+            </button>
+          </div>
+          <!-- the h-0 feels very hacky but idk -->
+          <div v-show="firstContentShown" class="h-0 flex-1">
+            <slot />
+          </div>
+          <div v-show="!firstContentShown">second test content</div>
+          <!--<slot />-->
         </div>
       </div>
     </TransitionCollapseHeight>
@@ -36,5 +57,6 @@
 <script setup>
 import TransitionCollapseHeight from "../TransitionCollapseHeight.vue";
 
-const expanded = ref(false);
+const expanded = ref(true);
+const firstContentShown = ref(true);
 </script>
