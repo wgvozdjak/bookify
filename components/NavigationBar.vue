@@ -2,7 +2,7 @@
 
 <template>
   <header class="w-full">
-    <div class="my-0 mx-auto flex w-full max-w-screen-xl py-4 px-2">
+    <div class="my-0 mx-auto flex w-full max-w-screen-lg py-4 px-2">
       <nav class="flex flex-1 items-center">
         <div class="flex">
           <a href="/" class="px-4 py-2">bookify.</a>

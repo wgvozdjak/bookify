@@ -3,10 +3,10 @@
     <AddBookPopup ref="addBookPopup" @bookAdded="bookAdded"></AddBookPopup>
 
     <!-- welcome message -->
-    <div class="mt-12 text-2xl font-bold">hi there! welcome to bookify 👋</div>
+    <div class="mt-4 text-2xl font-bold">hi there! welcome to bookify 👋</div>
 
     <!-- main content -->
-    <div id="main" class="mt-12 flex w-full flex-row gap-4">
+    <div id="main" class="mt-8 flex w-full flex-row gap-4">
       <!-- table of books read -->
       <div class="flex basis-1/2 flex-col">
         <div>
@@ -31,7 +31,7 @@
     </div>
 
     <!-- other features -->
-    <div class="mt-12 flex w-full flex-col">
+    <div class="mt-8 flex w-full flex-col">
       <!-- header -->
       <div class="mx-auto mb-6">other features</div>
 
@@ -127,34 +127,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.books-read-table .td,
-.books-read-table .th {
-  @apply w-1/5;
-  @apply text-left;
-  @apply align-top;
-  @apply px-3;
-  @apply py-2;
-}
-
-.books-read-table .td:not(.books-read-table .tr .td:last-child),
-.books-read-table .th:not(.books-read-table .tr .th:last-child) {
-  @apply border-r-2;
-  @apply border-black;
-  @apply border-solid;
-}
-
-.books-read-table .tr {
-  @apply flex;
-  @apply flex-row;
-}
-
-.books-read-table .th {
-  @apply font-bold;
-}
-
-.books-read-table .tr:last-child {
-  @apply flex-1;
-}
-</style>

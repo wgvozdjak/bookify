@@ -6,14 +6,14 @@
       <div class="th">date</div>
       <div class="th">title</div>
       <div class="th">author</div>
-      <div class="th">rating</div>
-      <div class="th">tags</div>
+      <!--<div class="th">rating</div>-->
+      <!--<div class="th">tags</div>-->
     </div>
     <div class="tr" v-for="book in books_list">
       <div class="td">{{ book.date }}</div>
       <div class="td">{{ book.title }}</div>
       <div class="td">{{ book.author }}</div>
-      <div class="td">
+      <!--<div class="td">
         <div class="flex items-center">
           <div v-for="index in 5">
             <svg
@@ -42,30 +42,13 @@
             </svg>
           </div>
         </div>
-      </div>
-      <div class="td">{{ book.tags }}</div>
+      </div>-->
+      <!--<div class="td">{{ book.tags }}</div>-->
     </div>
   </div>
 </template>
 
 <script setup>
-const books_hardcoded = ref([
-  {
-    date: "october 22, 2022",
-    title: "harry potter 1",
-    author: "jk rowling",
-    rating: 4,
-    tags: "magic, fantasy, fiction",
-  },
-  {
-    date: "october 26, 2022",
-    title: "harry potter 2",
-    author: "jk rowling",
-    rating: 3,
-    tags: "magic, fantasy, fiction",
-  },
-]);
-
 defineExpose({ addBook });
 
 const books_list = ref([]);
@@ -140,7 +123,7 @@ function addBook(book_info, book_user_info) {
 <style>
 .books-read-table .td,
 .books-read-table .th {
-  @apply w-1/5;
+  @apply w-1/3;
   @apply text-left;
   @apply align-top;
   @apply px-3;

@@ -2,7 +2,7 @@
   <div id="wrapper" class="h-full w-full">
     <div class="mx-auto flex min-h-screen flex-col justify-start">
       <NavigationBar @settings-clicked="openSettings" />
-      <div class="mx-auto w-full max-w-screen-xl px-6"><slot /></div>
+      <div class="mx-auto w-full max-w-screen-lg px-6"><slot /></div>
       <!--<Footer class="mt-auto" />-->
       <SettingsPopup ref="settingsPopup" />
     </div>

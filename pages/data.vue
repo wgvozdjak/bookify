@@ -7,7 +7,7 @@
           <h2>basic statistics</h2>
         </div>
         <div class="basis-1/2">
-          <h2 class="mb-8">graphs and tables</h2>
+          <h2 class="mb-4">graphs and tables</h2>
 
           <GraphsDropdown ref="genreDropdown">
             <template #label>book genre distribution</template>
@@ -91,8 +91,6 @@ async function getBookList(user_id) {
 
   for (let book of data) {
     const date = book.book_date;
-
-    console.log(book);
 
     // TODO: feels like a hacky way to do this? should the date object be a string object in the first place, or a date datatype?
     const year = parseInt(date.substring(0, 4));
