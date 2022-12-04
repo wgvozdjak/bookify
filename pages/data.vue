@@ -10,23 +10,55 @@
           <h2 class="mb-4">graphs and tables</h2>
           <GraphsDropdown class="mb-4">
             <template #label>book genre distribution</template>
-            <template #default>
+            <template #graph>
               <Bar
                 :chart-options="chartOptions"
                 :chart-data="genreChartData"
                 :styles="fullHeight"
               />
             </template>
+            <template #table>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>genre</th>
+                    <th>count</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="genre in genre_counts">
+                    <td>{{ genre[0] }}</td>
+                    <td>{{ genre[1] }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </template>
           </GraphsDropdown>
 
           <GraphsDropdown class="mb-4">
             <template #label>book rating distribution</template>
-            <template #default>
+            <template #graph>
               <Bar
                 :chart-options="chartOptions"
                 :chart-data="ratingChartData"
                 :styles="fullHeight"
               />
+            </template>
+            <template #table>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>rating</th>
+                    <th>count</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(rating_count, index) in rating_counts_all">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ rating_count }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </template>
           </GraphsDropdown>
         </div>
@@ -78,6 +110,8 @@ const user = useSupabaseUser();
 const books_list = ref([]);
 const genre_counts = new Map();
 const rating_counts = new Map();
+
+const rating_counts_all = ref([0, 0, 0, 0, 0]);
 
 // potential TODO: is there some sort of ``helper function'' idea in view that i can move this to?
 // because getBookList is also used in BooksTable and likely will be used elsewhere in the future
@@ -144,14 +178,12 @@ function getRatingData() {
     }
   }
 
-  let ratings = [1, 2, 3, 4, 5];
-  let counts = [0, 0, 0, 0, 0];
   for (const [rating, count] of rating_counts) {
-    counts[rating - 1] = count;
+    rating_counts_all.value[rating - 1] = count;
   }
   ratingChartData.value = {
-    labels: ratings.slice(),
-    datasets: [{ data: counts.slice() }],
+    labels: [1, 2, 3, 4, 5],
+    datasets: [{ data: rating_counts_all.value.slice() }],
   };
 }
 
@@ -179,3 +211,22 @@ if (user_loaded) {
   userLoaded();
 }
 </script>
+
+<style>
+.data-table {
+  @apply w-full border-separate border-spacing-0 rounded-xl border-[1px] border-slate-300;
+}
+
+.data-table th:first-child {
+  @apply border-r-[1px] border-slate-300;
+}
+
+.data-table td:first-child {
+  @apply border-r-[1px] border-slate-300;
+}
+
+.data-table th,
+.data-table td {
+  @apply px-3 py-2 text-left;
+}
+</style>

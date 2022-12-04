@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full rounded-lg bg-white/70 p-[3px] shadow-md">
+  <div class="w-full rounded-lg bg-white/70 p-[5px] shadow-md">
     <button
-      class="flex w-full items-center justify-between rounded-md p-2 text-left transition hover:bg-gray-200"
+      class="flex w-full items-center justify-between rounded-md p-4 text-left transition hover:bg-gray-200"
       @click="expanded = !expanded"
     >
       <slot name="label" />
@@ -24,14 +24,14 @@
 
     <TransitionCollapseHeight>
       <div v-show="expanded">
-        <div class="flex h-96 flex-col p-2">
-          <div>
+        <div class="flex h-96 flex-col p-4">
+          <div class="mb-4">
             <button
               @click="firstContentShown = true"
               :class="{ underline: firstContentShown }"
               class="mr-2 py-1"
             >
-              show graph
+              view graph
             </button>
             |
             <button
@@ -39,15 +39,16 @@
               :class="{ underline: !firstContentShown }"
               class="ml-2 py-1"
             >
-              show table
+              view table
             </button>
           </div>
           <!-- the h-0 feels very hacky but idk -->
           <div v-show="firstContentShown" class="h-0 flex-1">
-            <slot />
+            <slot name="graph" />
           </div>
-          <div v-show="!firstContentShown">second test content</div>
-          <!--<slot />-->
+          <div v-show="!firstContentShown">
+            <slot name="table" />
+          </div>
         </div>
       </div>
     </TransitionCollapseHeight>
@@ -57,6 +58,6 @@
 <script setup>
 import TransitionCollapseHeight from "../TransitionCollapseHeight.vue";
 
-const expanded = ref(true);
+const expanded = ref(false);
 const firstContentShown = ref(true);
 </script>
