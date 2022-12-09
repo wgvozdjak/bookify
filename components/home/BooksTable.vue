@@ -1,52 +1,20 @@
 <template>
-  <div
-    class="books-read-table mt-2 flex flex-1 border-separate border-spacing-0 flex-col rounded-2xl border-2 border-solid border-black bg-white shadow-lg"
+  <table
+    class="books-read-table mt-2 block h-96 overflow-y-scroll rounded-xl border-2 border-solid border-black bg-white shadow-lg"
   >
-    <div class="tr">
-      <div class="th">date</div>
-      <div class="th">title</div>
-      <div class="th">author</div>
-      <div class="th">rating</div>
-      <!--<div class="th">tags</div>-->
-    </div>
-    <div class="tr" v-for="book in books_list">
-      <div class="td">{{ book.date }}</div>
-      <div class="td">{{ book.title }}</div>
-      <div class="td">{{ book.author }}</div>
-      <div class="td">
-        {{ book.rating }} / 5
-        <!--<div class="flex items-center">
-          <div v-for="index in 5">
-            <svg
-              aria-hidden="true"
-              class="h-3 w-3 text-yellow-400"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-              v-if="index <= book.rating"
-            >
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-              ></path>
-            </svg>
-            <svg
-              aria-hidden="true"
-              class="h-3 w-3 text-gray-300 dark:text-gray-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-              v-else
-            >
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-              ></path>
-            </svg>
-          </div>
-        </div>-->
-      </div>
-      <!--<div class="td">{{ book.tags }}</div>-->
-    </div>
-  </div>
+    <tr class="sticky top-0 bg-white">
+      <th>date</th>
+      <th>title</th>
+      <th>author</th>
+      <th>rating</th>
+    </tr>
+    <tr v-for="book in books_list">
+      <td>{{ book.date }}</td>
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.rating }} / 5</td>
+    </tr>
+  </table>
 </template>
 
 <script setup>
@@ -122,8 +90,8 @@ function addBook(book_info, book_user_info) {
 </script>
 
 <style>
-.books-read-table .td,
-.books-read-table .th {
+.books-read-table td,
+.books-read-table th {
   @apply w-1/3;
   @apply text-left;
   @apply align-top;
@@ -131,23 +99,43 @@ function addBook(book_info, book_user_info) {
   @apply py-2;
 }
 
-.books-read-table .td:not(.books-read-table .tr .td:last-child),
-.books-read-table .th:not(.books-read-table .tr .th:last-child) {
+.books-read-table td:not(.books-read-table tr td:last-child),
+.books-read-table th:not(.books-read-table tr th:last-child) {
   @apply border-r-2;
   @apply border-black;
   @apply border-solid;
 }
 
-.books-read-table .tr {
+.books-read-table tr {
   @apply flex;
   @apply flex-row;
 }
 
-.books-read-table .th {
+.books-read-table th {
   @apply font-bold;
 }
 
-.books-read-table .tr:last-child {
+.books-read-table tr:last-child {
   @apply flex-1;
+}
+
+.books-read-table::-webkit-scrollbar-thumb {
+  width: 10px;
+  background: #999999;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 4px solid transparent;
+}
+
+.books-read-table::-webkit-scrollbar-thumb:hover {
+  background: #6b6b6b;
+  background-clip: padding-box;
+  border: 4px solid transparent;
+}
+
+.books-read-table::-webkit-scrollbar {
+  width: 16px;
+  margin-right: -1px;
+  overflow: hidden;
 }
 </style>

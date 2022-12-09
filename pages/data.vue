@@ -196,6 +196,7 @@ function userLoaded() {
 
 let user_loaded = false;
 if (user.value) {
+  userLoaded();
   user_loaded = true;
 }
 supabase.auth.onAuthStateChange((event, session) => {
@@ -206,10 +207,6 @@ supabase.auth.onAuthStateChange((event, session) => {
     }
   }
 });
-
-if (user_loaded) {
-  userLoaded();
-}
 </script>
 
 <style>
