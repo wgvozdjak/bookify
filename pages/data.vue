@@ -5,6 +5,9 @@
       <div class="flex flex-row">
         <div class="basis-1/2">
           <h2>basic statistics</h2>
+          <div>
+            <div>total books read: {{ count_books }}</div>
+          </div>
         </div>
         <div class="basis-1/2">
           <h2 class="mb-4">graphs and tables</h2>
@@ -102,6 +105,8 @@ const chartOptions = ref({
   },
 });
 
+const count_books = ref(0);
+
 const fullHeight = ref({ height: "100%" });
 
 const supabase = useSupabaseClient();
@@ -138,6 +143,7 @@ async function getBookList(user_id) {
       rating: book.rating,
       tags: "this is a test",
     });
+    count_books.value++;
   }
 }
 

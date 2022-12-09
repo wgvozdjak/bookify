@@ -13,20 +13,20 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+  Legend,
 } from "chart.js";
 import { Line } from "vue-chartjs";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Legend);
 
 const yearData = ref({
   labels: ["January", "February"],
-  datasets: [{ data: [40, 39] }],
+  datasets: [{ data: [40, 39] }, { data: [25, 50] }],
 });
 
 const yearOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
-  borderColor: "#a78bfa",
   hover: { mode: null },
   scale: {
     y: {
@@ -101,9 +101,38 @@ async function userLoaded() {
     "dec",
   ];
 
+  const count = 20;
+
+  const increment = count / 12;
   yearData.value = {
     labels: months,
-    datasets: [{ data: cumulative_month_counts }],
+    datasets: [
+      {
+        data: cumulative_month_counts,
+        borderColor: "#a78bfa",
+        /*backgroundColor: "#a78bfa",*/
+        fill: false,
+        label: "progress",
+      },
+      {
+        data: [
+          increment,
+          increment * 2,
+          increment * 3,
+          increment * 4,
+          increment * 5,
+          increment * 6,
+          increment * 7,
+          increment * 8,
+          increment * 9,
+          increment * 10,
+          increment * 11,
+          increment * 12,
+        ],
+        fill: false,
+        label: "goal",
+      },
+    ],
   };
 }
 </script>
