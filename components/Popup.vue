@@ -9,7 +9,7 @@
   >
     <div
       v-if="isVisible"
-      class="fixed top-0 left-0 flex h-full w-full items-center justify-center bg-black bg-opacity-20"
+      class="fixed top-0 left-0 z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-20"
     >
       <div
         class="bg-solid flex w-[425px] flex-col rounded-3xl border-2 border-solid border-black bg-white p-6 shadow-xl"

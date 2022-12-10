@@ -9,9 +9,10 @@
         </div>
         <div class="relative flex flex-1 justify-end">
           <a href="/" class="px-4 py-2">home</a>
-          <a href="#" class="px-4 py-2">goals</a>
+          <a href="/goals" class="px-4 py-2">goals</a>
           <a href="/data" class="px-4 py-2">data</a>
           <a href="#" class="px-4 py-2">recommendations</a>
+          <!-- TODO: look into TypeScript issues with @click below: https://github.com/johnsoncodehk/volar/issues/464 -->
           <button href="#" class="px-4 py-2" @click="$emit('settingsClicked')">
             settings
           </button>

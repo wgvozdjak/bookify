@@ -2,7 +2,7 @@
   <table
     class="books-read-table mt-2 block h-96 overflow-y-scroll rounded-xl border-2 border-solid border-black bg-white shadow-lg"
   >
-    <tr class="sticky top-0 bg-white">
+    <tr class="sticky top-0 z-0 bg-white">
       <th>date</th>
       <th>title</th>
       <th>author</th>
