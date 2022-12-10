@@ -20,8 +20,8 @@ import { Line } from "vue-chartjs";
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Legend);
 
 const yearData = ref({
-  labels: ["January", "February"],
-  datasets: [{ data: [40, 39] }, { data: [25, 50] }],
+  labels: [],
+  datasets: [{ data: [] }, { data: [] }],
 });
 
 const yearOptions = ref({
@@ -40,7 +40,7 @@ const yearOptions = ref({
 const fullHeight = ref({ height: "100%" });
 
 const supabase = useSupabaseClient();
-const user = useSupabaseUser();
+let user = useSupabaseUser();
 
 let user_loaded = false;
 if (user.value) {
@@ -50,8 +50,14 @@ if (user.value) {
 supabase.auth.onAuthStateChange((event, session) => {
   if (!user_loaded) {
     if (event == "SIGNED_IN") {
-      userLoaded();
-      user_loaded = true;
+      const timer = setInterval(async () => {
+        user = useSupabaseUser();
+        if (user.value) {
+          clearInterval(timer);
+          userLoaded();
+          user_loaded = true;
+        }
+      }, 100);
     }
   }
 });
@@ -101,7 +107,7 @@ async function userLoaded() {
     "dec",
   ];
 
-  const count = 20;
+  const count = 7;
 
   const increment = count / 12;
   yearData.value = {

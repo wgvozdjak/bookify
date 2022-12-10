@@ -110,7 +110,7 @@ const count_books = ref(0);
 const fullHeight = ref({ height: "100%" });
 
 const supabase = useSupabaseClient();
-const user = useSupabaseUser();
+let user = useSupabaseUser();
 
 const books_list = ref([]);
 const genre_counts = new Map();
@@ -208,8 +208,14 @@ if (user.value) {
 supabase.auth.onAuthStateChange((event, session) => {
   if (!user_loaded) {
     if (event == "SIGNED_IN") {
-      userLoaded();
-      user_loaded = true;
+      const timer = setInterval(async () => {
+        user = useSupabaseUser();
+        if (user.value) {
+          clearInterval(timer);
+          userLoaded();
+          user_loaded = true;
+        }
+      }, 100);
     }
   }
 });
