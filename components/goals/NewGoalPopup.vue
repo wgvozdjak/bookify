@@ -4,6 +4,8 @@
     <template #default>
       <form class="space-y-6" @submit.prevent="handleSubmit">
         <FormInputElement v-model="book_count" content="book count goal" />
+        <FormInputElement v-model="start_date" content="goal start date" />
+        <FormInputElement v-model="end_date" content="goal end date" />
 
         <button
           type="submit"
@@ -31,6 +33,8 @@ function openPopup() {
 }
 
 const book_count = ref(0);
+const start_date = ref("");
+const end_date = ref("");
 
 function handleSubmit() {
   createGoal();
@@ -38,11 +42,16 @@ function handleSubmit() {
 
 async function createGoal() {
   try {
+    const start = new Date(start_date.value).toISOString();
+    console.log(start);
     const { data, error } = await supabase
       .from("goals")
       .insert({
         id: user.value.id,
         book_count: book_count.value,
+        start_date: new Date(start_date.value).toISOString(),
+        end_date: new Date(end_date.value).toISOString(),
+        status: false,
       })
       .select();
     return data;

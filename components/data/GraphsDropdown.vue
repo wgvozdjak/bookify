@@ -1,7 +1,7 @@
 <template>
   <div class="w-full rounded-lg bg-white/70 p-[5px] shadow-md">
     <button
-      class="flex w-full items-center justify-between rounded-md p-4 text-left transition hover:bg-gray-200"
+      class="flex w-full items-center justify-between rounded-md px-4 py-2 text-left transition hover:bg-gray-200"
       @click="expanded = !expanded"
     >
       <slot name="label" />

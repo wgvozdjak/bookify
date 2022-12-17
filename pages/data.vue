@@ -1,16 +1,16 @@
 <template>
   <div>
     <div class="flex flex-col">
-      <div class="font-bold">data</div>
+      <div class="mb-6 text-3xl font-bold">data</div>
       <div class="flex flex-row">
         <div class="basis-1/2">
-          <h2>basic statistics</h2>
+          <h2 class="mb-4 font-bold">basic statistics</h2>
           <div>
             <div>total books read: {{ count_books }}</div>
           </div>
         </div>
         <div class="basis-1/2">
-          <h2 class="mb-4">graphs and tables</h2>
+          <h2 class="mb-4 font-bold">graphs and tables</h2>
           <GraphsDropdown class="mb-4">
             <template #label>book genre distribution</template>
             <template #graph>

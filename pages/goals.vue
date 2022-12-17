@@ -1,21 +1,47 @@
 <template>
-  <NewGoalPopup ref="newGoalPopup" />
-
-  <button @click="setNewGoal">set new goal</button>
-
   <div>
-    <div v-for="(goal, index) in goals">
-      <h2>Goal #{{ index }}</h2>
-      <p>Start date: {{ goal.start_date }}</p>
-      <p>End date: {{ goal.end_date }}</p>
-      <p>Goal: {{ goal.book_count }}</p>
-      <p>Status: {{ !goal.status ? "in progress" : "finished" }}</p>
+    <NewGoalPopup ref="newGoalPopup" />
+
+    <h1 class="mb-2 text-3xl font-bold underline">your goals</h1>
+
+    <button
+      @click="setNewGoal"
+      class="mb-6 rounded-xl border-2 border-solid border-black px-2 py-[2px]"
+    >
+      set new goal
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="inline h-6 w-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+        />
+      </svg>
+    </button>
+
+    <div>
+      <div v-for="(goal, index) in goals">
+        <Goal
+          :index="index + 1"
+          :start_date="goal.start_date"
+          :end_date="goal.end_date"
+          :book_count="goal.book_count"
+          :status="goal.status"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import NewGoalPopup from "../components/goals/NewGoalPopup.vue";
+import Goal from "../components/goals/Goal.vue";
 
 let user = useSupabaseUser();
 const supabase = useSupabaseClient();
@@ -54,16 +80,13 @@ async function getGoals() {
     .eq("id", user.value.id);
 
   // TODO: i could probably just directly use the data variable in the vue code
-
-  console.log(data);
   for (let goal of data) {
     goals.value.push({
       book_count: goal.book_count,
       start_date: goal.start_date,
-      finish_date: goal.finish_date,
+      end_date: goal.end_date,
       status: goal.status,
     });
   }
-  console.log(goals.value);
 }
 </script>
