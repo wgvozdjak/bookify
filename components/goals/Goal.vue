@@ -18,7 +18,6 @@
 <script setup>
 import {
   Chart as ChartJS,
-  CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
@@ -26,7 +25,7 @@ import {
   TimeScale,
 } from "chart.js";
 import { Line } from "vue-chartjs";
-//import "chartjs-adapter-moment";
+import "chartjs-adapter-moment";
 
 ChartJS.register(LinearScale, TimeScale, PointElement, LineElement, Legend);
 
@@ -40,43 +39,24 @@ const props = defineProps({
 
 const { index, start_date, end_date, book_count, status } = toRefs(props);
 
-/*const goalData = ref({
-  labels: [],
-  datasets: [{ data: [] }],
-});*/
-
 const goalData = ref({
-  labels: [new Date("2015-03-15T13:03:00Z"), new Date("2015-03-25T13:02:00Z")],
+  labels: [],
   datasets: [
     {
-      data: [120, 30],
+      data: [],
     },
   ],
 });
-
-/*const goalOptions = ref({
-  responsive: true,
-  maintainAspectRatio: false,
-  hover: { mode: null },
-  scale: {
-    y: {
-      ticks: {
-        stepSize: 1,
-      },
-    },
-    xAxes: [
-      {
-        type: "time",
-        distribution: "linear",
-      },
-    ],
-  },
-});*/
 
 const goalOptions = ref({
   scales: {
     x: {
       type: "time",
+    },
+    y: {
+      ticks: {
+        stepSize: 1,
+      },
     },
   },
 });
@@ -86,7 +66,7 @@ const supabase = useSupabaseClient();
 
 let user_loaded = false;
 if (user.value) {
-  //getBooksInRange(start_date.value, end_date.value);
+  getBooksInRange(start_date.value, end_date.value);
   user_loaded = true;
 }
 supabase.auth.onAuthStateChange((event, session) => {
@@ -96,7 +76,7 @@ supabase.auth.onAuthStateChange((event, session) => {
         user = useSupabaseUser();
         if (user.value) {
           clearInterval(timer);
-          //getBooksInRange(start_date.value, end_date.value);
+          getBooksInRange(start_date.value, end_date.value);
           user_loaded = true;
         }
       }, 100);
@@ -120,6 +100,10 @@ async function getBooksInRange(start_date, end_date) {
 
   let last_date = "";
   let current_count = 0;
+
+  labels.push(new Date(start_date).toISOString());
+  datapoints.push(current_count);
+
   for (let book of data) {
     current_count++;
     if (book.date == last_date) {
@@ -131,10 +115,6 @@ async function getBooksInRange(start_date, end_date) {
     last_date = book.date;
   }
 
-  console.log(data);
-  console.log(labels);
-  console.log(datapoints);
-
   goalData.value = {
     labels: labels,
     datasets: [
@@ -145,24 +125,6 @@ async function getBooksInRange(start_date, end_date) {
         fill: false,
         label: "progress",
       },
-      /*{
-        data: [
-          increment,
-          increment * 2,
-          increment * 3,
-          increment * 4,
-          increment * 5,
-          increment * 6,
-          increment * 7,
-          increment * 8,
-          increment * 9,
-          increment * 10,
-          increment * 11,
-          increment * 12,
-        ],
-        fill: false,
-        label: "goal",
-      },*/
     ],
   };
 }
