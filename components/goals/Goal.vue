@@ -2,14 +2,18 @@
   <h2 class="font-bold">goal #{{ index }}</h2>
   <div class="pl-10">
     <div class="flex flex-row">
-      <div class="basis-1/2">
+      <div class="basis-1/3">
         <p>start date: {{ start_date }}</p>
         <p>end date: {{ end_date }}</p>
         <p>goal: {{ book_count }}</p>
         <p>status: {{ !status ? "in progress" : "finished" }}</p>
       </div>
-      <div class="basis-1/2">
-        <Line :chart-data="goalData" :chart-options="goalOptions" />
+      <div class="h-96 basis-1/3">
+        <Line
+          :styles="fullHeight"
+          :chart-data="goalData"
+          :chart-options="goalOptions"
+        />
       </div>
     </div>
   </div>
@@ -39,6 +43,8 @@ const props = defineProps({
 
 const { index, start_date, end_date, book_count, status } = toRefs(props);
 
+const fullHeight = ref({ height: "100%" });
+
 const goalData = ref({
   labels: [],
   datasets: [
@@ -49,6 +55,8 @@ const goalData = ref({
 });
 
 const goalOptions = ref({
+  responsive: true,
+  maintainAspectRatio: false,
   scales: {
     x: {
       type: "time",
@@ -126,6 +134,23 @@ async function getBooksInRange(start_date, end_date) {
         label: "progress",
       },
     ],
+  };
+
+  goalOptions.value = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        type: "time",
+        // min: new Date(start_date).toISOString(),
+        max: new Date(end_date).toISOString(),
+      },
+      y: {
+        ticks: {
+          stepSize: 1,
+        },
+      },
+    },
   };
 }
 </script>
