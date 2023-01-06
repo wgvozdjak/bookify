@@ -2,18 +2,26 @@
   <table
     class="books-read-table mt-2 block h-96 overflow-y-scroll rounded-xl border-2 border-solid border-black bg-white shadow-lg"
   >
-    <tr class="sticky top-0 z-0 bg-white">
-      <th>date</th>
-      <th>title</th>
-      <th>author</th>
-      <th>rating</th>
-    </tr>
-    <tr v-for="book in books_list">
-      <td>{{ book.date }}</td>
-      <td>{{ book.title }}</td>
-      <td>{{ book.author }}</td>
-      <td>{{ book.rating }} / 5</td>
-    </tr>
+    <thead class="sticky top-0 z-0">
+      <tr class="bg-white">
+        <th>date</th>
+        <th>title</th>
+        <th>author</th>
+        <!--<th>rating</th>-->
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        v-for="book in books_list"
+        @click="bookClicked(book)"
+        class="transition hover:cursor-pointer hover:bg-gray-200"
+      >
+        <td>{{ book.date }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <!--<td>{{ book.rating }} / 5</td>-->
+      </tr>
+    </tbody>
   </table>
 </template>
 
@@ -64,6 +72,7 @@ async function getBookList(user_id) {
       author: book.author,
       rating: book.rating,
       tags: "this is a test",
+      read_id: book.read_id,
     });
 
     // TODO: implement tags, both backend and frontend
@@ -86,6 +95,11 @@ function addBook(book_info, book_user_info) {
     rating: book_user_info.rating,
     tags: "this is a test",
   });
+}
+
+function bookClicked(book) {
+  const id = book.read_id;
+  window.location.href = "book?id=" + id;
 }
 </script>
 
