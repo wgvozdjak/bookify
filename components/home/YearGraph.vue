@@ -107,9 +107,10 @@ async function userLoaded() {
     "dec",
   ];
 
-  const count = 7;
+  // TODO: add a special yearly goal that this will refer to (stop hardcoding this)
+  const goal = 7;
 
-  const increment = count / 12;
+  const increment = goal / 12;
   yearData.value = {
     labels: months,
     datasets: [

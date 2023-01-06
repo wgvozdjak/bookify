@@ -21,7 +21,7 @@
       <!-- books read graph -->
       <div class="flex basis-1/2 flex-col">
         <!-- TODO: change this so year is dynamic -->
-        <div class="font-bold">2022 book chart</div>
+        <div class="font-bold">{{ new Date().getFullYear() }} book chart</div>
         <div
           class="mt-2 h-96 w-full rounded-2xl border-2 border-solid border-black bg-white p-4 shadow-lg"
         >
