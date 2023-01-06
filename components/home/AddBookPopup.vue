@@ -97,6 +97,7 @@ async function addTitle() {
     const added_book_id = book_data[0].book_id;
     const insertToReadBooksPromise = insertToReadBooks(added_book_id);
     insertToReadBooksPromise.then((read_book_data) => {
+      console.log(read_book_data[0]);
       emit("bookAdded", book_data[0], read_book_data[0]);
     });
   });

@@ -8,7 +8,7 @@
     <!-- main content -->
     <div id="main" class="mt-8 flex w-full flex-row gap-4">
       <!-- table of books read -->
-      <div class="flex basis-1/2 flex-col">
+      <div class="flex min-w-[50%] basis-1/2 flex-col">
         <div>
           <div class="inline-block font-bold">books read</div>
           <button @click="openAddBookPopup" class="ml-4 inline-block">
@@ -19,7 +19,7 @@
       </div>
 
       <!-- books read graph -->
-      <div class="flex basis-1/2 flex-col">
+      <div class="flex min-w-[50%] basis-1/2 flex-col">
         <!-- TODO: change this so year is dynamic -->
         <div class="font-bold">{{ new Date().getFullYear() }} book chart</div>
         <div
@@ -61,7 +61,7 @@
 
         <NuxtLink
           to="/"
-          class="inline-block w-60 rounded-2xl border-2 border-solid border-black px-4 py-2 shadow-md"
+          class="mt-0 inline-block w-60 rounded-2xl border-2 border-solid border-black bg-white px-4 py-2 shadow-md"
         >
           recommendations
           <svg
@@ -82,7 +82,7 @@
 
         <NuxtLink
           to="/"
-          class="inline-block w-60 rounded-2xl border-2 border-solid border-black px-4 py-2 shadow-md"
+          class="mt-0 inline-block w-60 rounded-2xl border-2 border-solid border-black bg-white px-4 py-2 shadow-md"
         >
           isbn to goodreads
           <svg

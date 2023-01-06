@@ -2,7 +2,7 @@
   <table
     class="books-read-table mt-2 block h-96 overflow-y-scroll rounded-xl border-2 border-solid border-black bg-white shadow-lg"
   >
-    <thead class="sticky top-0 z-0">
+    <thead class="sticky top-0 z-0 block">
       <tr class="bg-white">
         <th>date</th>
         <th>title</th>
@@ -10,7 +10,7 @@
         <!--<th>rating</th>-->
       </tr>
     </thead>
-    <tbody>
+    <tbody class="block">
       <tr
         v-for="book in books_list"
         @click="bookClicked(book)"
@@ -94,6 +94,7 @@ function addBook(book_info, book_user_info) {
     author: book_info.author,
     rating: book_user_info.rating,
     tags: "this is a test",
+    read_id: book_user_info.read_id,
   });
 }
 
@@ -107,6 +108,7 @@ function bookClicked(book) {
 .books-read-table td,
 .books-read-table th {
   @apply w-1/3;
+  @apply break-words;
   @apply text-left;
   @apply align-top;
   @apply px-3;
