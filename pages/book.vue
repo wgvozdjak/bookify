@@ -106,7 +106,6 @@ async function getBookData() {
           book_data.value["title"] = generalData[0].title;
           book_data.value["author"] = generalData[0].author;
           book_data.value["genre"] = generalData[0].genre;
-          console.log(book_data.value);
         });
       });
 

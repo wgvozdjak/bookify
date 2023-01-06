@@ -43,7 +43,6 @@ function handleSubmit() {
 async function createGoal() {
   try {
     const start = new Date(start_date.value).toISOString();
-    console.log(start);
     const { data, error } = await supabase
       .from("goals")
       .insert({
