@@ -71,8 +71,10 @@ async function userLoaded() {
     .eq("id", user.value.id)
     .gte("date", start_date.toISOString());
 
+  const count_months = new Date().getMonth();
+
   let month_counts = [];
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i <= count_months; i++) {
     month_counts.push(0);
   }
 

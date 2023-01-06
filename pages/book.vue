@@ -2,7 +2,7 @@
   <div>
     <div class="flex flex-col">
       <h1 class="mb-6 text-3xl font-bold underline">
-        {{ book_data.title }}
+        book information: {{ book_data.title }}
       </h1>
       <div class="flex flex-row">
         <div class="basis-1/3">
