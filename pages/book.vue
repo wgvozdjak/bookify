@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-col">
-      <h1 class="mb-6 text-3xl font-bold underline">
+      <h1 class="mb-6 text-3xl font-bold">
         book information: {{ book_data.title }}
       </h1>
       <div class="flex flex-row">

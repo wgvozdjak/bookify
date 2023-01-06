@@ -2,28 +2,9 @@
   <div>
     <NewGoalPopup ref="newGoalPopup" />
 
-    <h1 class="mb-2 text-3xl font-bold underline">your goals</h1>
+    <h1 class="mb-2 text-3xl font-bold">your goals</h1>
 
-    <button
-      @click="setNewGoal"
-      class="mb-6 rounded-xl border-2 border-solid border-black px-2 py-[2px]"
-    >
-      set new goal
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="inline h-6 w-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-        />
-      </svg>
-    </button>
+    <button @click="setNewGoal" class="mb-6 rounded-xl">set new goal</button>
 
     <div>
       <div v-for="(goal, index) in goals">
