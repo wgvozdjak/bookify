@@ -12,7 +12,8 @@
       class="fixed top-0 left-0 z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-20"
     >
       <div
-        class="bg-solid flex w-[425px] flex-col rounded-3xl border-2 border-solid border-black bg-white p-6 shadow-xl"
+        class="bg-solid flex flex-col rounded-3xl border-2 border-solid border-black bg-white p-6 shadow-xl"
+        :class="size == 'normal' ? 'w-[425px]' : 'w-[750px]'"
       >
         <div class="mb-6 flex w-full flex-row justify-between">
           <h1 class="text-xl font-bold"><slot name="header"></slot></h1>
@@ -27,6 +28,13 @@
 </template>
 
 <script setup>
+const props = defineProps({
+  size: {
+    type: String,
+    default: "normal",
+  },
+});
+
 defineExpose({ openPopup, closePopup });
 
 let isVisible = ref(false);

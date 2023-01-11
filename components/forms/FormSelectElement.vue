@@ -39,7 +39,7 @@
       leave-to-class="transform opacity-0 scale-95"
     >
       <div
-        class="bg-solid ring-solid absolute mt-2 w-full origin-top-right rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-10 focus:outline-none"
+        class="bg-solid ring-solid absolute z-50 mt-2 w-full origin-top-right rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-10 focus:outline-none"
         v-if="dropdownOpen"
       >
         <div class="flex w-full flex-col py-1">

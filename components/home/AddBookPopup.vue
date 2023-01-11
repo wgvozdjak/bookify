@@ -1,5 +1,5 @@
 <template>
-  <Popup ref="popup">
+  <Popup size="wide" ref="popup">
     <template #header>add a book</template>
     <template #default>
       <form class="space-y-6" @submit.prevent="addTitle">
@@ -16,6 +16,8 @@
           :options="['fantasy', 'science fiction', 'nonfiction']"
           default-value="book genre"
         />
+
+        <FormTextareaElement v-model="description" content="description" />
 
         <!-- TODO: limit rating to an integer between 1 and 5, inclusive -->
         <!-- TODO: convert book rating to a hover-click 5-star input -->
@@ -37,6 +39,7 @@
 import { ref } from "vue";
 import FormInputElement from "../forms/FormInputElement.vue";
 import FormSelectElement from "../forms/FormSelectElement.vue";
+import FormTextareaElement from "../forms/FormTextareaElement.vue";
 
 const popup = ref(null);
 defineExpose({ openPopup });
@@ -51,6 +54,7 @@ const title = ref("");
 const author = ref("");
 const rating = ref("");
 const genre = ref("");
+const description = ref("");
 const emit = defineEmits(["bookAdded"]);
 
 async function insertToBooks() {
@@ -80,6 +84,7 @@ async function insertToReadBooks(added_book_id) {
         book_id: added_book_id,
         rating: rating.value,
         date: date_isostring,
+        description: description.value,
       })
       .select();
     return data;
