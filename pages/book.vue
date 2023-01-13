@@ -7,7 +7,7 @@
       <div class="flex flex-row">
         <div class="basis-1/3">
           <h2 class="font-bold underline">description</h2>
-          <p></p>
+          <p>{{ book_data.description }}</p>
         </div>
 
         <div class="basis-1/3">
@@ -101,6 +101,7 @@ async function getBookData() {
 
         book_data.value["rating"] = specificData[0].rating;
         book_data.value["date"] = specificData[0].date;
+        book_data.value["description"] = specificData[0].description;
 
         getGeneralData(book_id).then((generalData) => {
           book_data.value["title"] = generalData[0].title;
