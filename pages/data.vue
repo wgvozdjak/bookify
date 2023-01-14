@@ -7,6 +7,12 @@
           <h2 class="mb-4 font-bold">basic statistics</h2>
           <div>
             <div>total books read: {{ count_books }}</div>
+            <div>
+              average days spent per book:
+              {{ Math.round((average_time + Number.EPSILON) * 100) / 100 }}
+
+              <!-- TODO: add notice that this only computes average of books where both start date and end date were provided -->
+            </div>
           </div>
         </div>
         <div class="basis-1/2">
@@ -106,6 +112,7 @@ const chartOptions = ref({
 });
 
 const count_books = ref(0);
+const average_time = ref(0);
 
 const fullHeight = ref({ height: "100%" });
 
@@ -126,6 +133,8 @@ async function getBookList(user_id) {
     user_id: user_id,
   });
 
+  let count_not_null = 0;
+
   for (let book of data) {
     const date = book.book_date;
 
@@ -141,10 +150,23 @@ async function getBookList(user_id) {
       author: book.author,
       genre: book.genre,
       rating: book.rating,
-      tags: "this is a test",
+      tags: "",
     });
     count_books.value++;
+
+    if (book.start_date != null && book.finish_date != null) {
+      const dateDiff = Math.abs(
+        new Date(book.finish_date) - new Date(book.start_date)
+      );
+      // TODO: do i want this +1 (to include both the start and end date)?
+      const days = Math.ceil(dateDiff / (1000 * 60 * 60 * 24)) + 1;
+
+      average_time.value += days;
+      count_not_null++;
+    }
   }
+
+  average_time.value /= count_not_null;
 }
 
 function getGenreData() {
