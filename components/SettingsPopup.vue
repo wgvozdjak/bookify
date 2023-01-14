@@ -1,7 +1,7 @@
 <template>
   <Popup ref="popup">
     <template #header v-if="!user">sign in with magic link</template>
-    <template #header v-else>bookify settings</template>
+    <template #header v-else>settings</template>
     <template #default>
       <form v-if="!user" @submit.prevent="handleLogin" class="w-full">
         <div class="flex w-full flex-col gap-6">
@@ -30,19 +30,19 @@
           content="email"
           :disabled="true"
         />
-        <FormInputElement v-model="username" content="username" />
-        <FormInputElement v-model="website" content="website" />
+        <!--<FormInputElement v-model="username" content="username" />
+        <FormInputElement v-model="website" content="website" />-->
 
         <div class="flex w-full flex-row gap-4">
-          <input
+          <!--<input
             type="submit"
             class="basis-1/2 cursor-pointer justify-center rounded-lg bg-violet-500 py-2 font-medium text-white transition hover:bg-violet-400"
             :value="loading ? 'loading ...' : 'update'"
             :disabled="loading"
-          />
+          />-->
 
           <button
-            class="basis-1/2 cursor-pointer justify-center rounded-lg bg-violet-500 py-2 font-medium text-white transition hover:bg-violet-400"
+            class="basis-full cursor-pointer justify-center rounded-lg bg-violet-500 py-2 font-medium text-white transition hover:bg-violet-400"
             @click="signOut"
             :disabled="loading"
           >
@@ -129,6 +129,7 @@ if (user.value) {
 }
 
 // Update profile data
+// TODO: remove this unnecessary stuff
 async function updateProfile() {
   try {
     loading.value = true;

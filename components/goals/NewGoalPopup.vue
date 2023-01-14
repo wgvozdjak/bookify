@@ -41,6 +41,8 @@ function handleSubmit() {
 }
 
 async function createGoal() {
+  popup.value.closePopup();
+
   try {
     const start = new Date(start_date.value).toISOString();
     const { data, error } = await supabase

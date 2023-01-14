@@ -4,7 +4,7 @@
       <h1 class="mb-6 text-3xl font-bold">
         book information: {{ book_data.title }}
       </h1>
-      <div class="flex flex-row">
+      <div class="flex flex-row gap-8">
         <div class="basis-1/3">
           <h2 class="font-bold underline">description</h2>
           <p>{{ book_data.description }}</p>

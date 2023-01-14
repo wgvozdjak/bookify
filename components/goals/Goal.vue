@@ -1,6 +1,6 @@
 <template>
   <h2 class="font-bold">goal #{{ index }}</h2>
-  <div class="pl-10">
+  <div class="mr-6 pl-10">
     <div class="flex flex-row">
       <div class="basis-1/3">
         <p>start date: {{ start_date }}</p>
@@ -65,6 +65,7 @@ const goalOptions = ref({
       ticks: {
         stepSize: 1,
       },
+      suggestedMin: -2,
     },
   },
 });
@@ -150,6 +151,8 @@ async function getBooksInRange(start_date, end_date) {
         ticks: {
           stepSize: 1,
         },
+        // TODO: this kind of cuts off the data point when it is 0, but if i remove this then the scale sometimes goes below 0
+        min: 0,
       },
     },
   };
