@@ -31,6 +31,11 @@ export default {
 <style>
 #wrapper {
   background-image: url("assets/background.png");
+  /* 
+    TODO: background-size is a little hacky, e.g. when page size increases. cover might be better
+    but i don't really like the look of it.
+    TODO: img tag etc. might be better to speed the image up. see https://wpspeedmatters.com/speed-up-background-images/
+  */
   background-size: 100% 100%;
 }
 </style>
