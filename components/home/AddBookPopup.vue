@@ -3,6 +3,8 @@
     <template #header>add a book</template>
     <template #default>
       <form class="space-y-6" @submit.prevent="addTitle">
+        <!--<div class="flex flex-row gap-4">
+          <div class="basis-1/2 space-y-6">-->
         <FormInputElement v-model="title" content="book title" />
         <FormInputElement v-model="author" content="book author" />
         <FormInputElement
@@ -21,6 +23,28 @@
 
         <FormInputElement v-model="start_date" content="book start date" />
         <FormInputElement v-model="finish_date" content="book end date" />
+
+        <!-- TODO: complete progress table -->
+        <!--</div>
+
+          <div class="basis-1/2">
+            progress: <br />
+            <table class="progress-table w-full">
+              <thead>
+                <tr class="border-b-2 border-black">
+                  <th>date</th>
+                  <th>pages through</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1/11/2023</td>
+                  <td>120</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>--->
 
         <!-- TODO: limit rating to an integer between 1 and 5, inclusive -->
         <!-- TODO: convert book rating to a hover-click 5-star input -->
@@ -125,3 +149,15 @@ async function addTitle() {
       console.log(titles);*/
 }
 </script>
+
+<style>
+.progress-table td:first-child,
+.progress-table th:first-child {
+  @apply border-r-2 border-black;
+}
+
+.progress-table td,
+.progress-table th {
+  @apply p-1 text-center;
+}
+</style>
