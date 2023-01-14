@@ -19,6 +19,9 @@
 
         <FormTextareaElement v-model="description" content="description" />
 
+        <FormInputElement v-model="start_date" content="book start date" />
+        <FormInputElement v-model="finish_date" content="book end date" />
+
         <!-- TODO: limit rating to an integer between 1 and 5, inclusive -->
         <!-- TODO: convert book rating to a hover-click 5-star input -->
 
@@ -55,6 +58,8 @@ const author = ref("");
 const rating = ref("");
 const genre = ref("");
 const description = ref("");
+const start_date = ref("");
+const finish_date = ref("");
 const emit = defineEmits(["bookAdded"]);
 
 async function insertToBooks() {
@@ -77,6 +82,10 @@ async function insertToReadBooks(added_book_id) {
   try {
     const date = new Date();
     const date_isostring = date.toISOString();
+
+    const start_date_obj = new Date(start_date.value);
+    const finish_date_obj = new Date(finish_date.value);
+
     const { data, error } = await supabase
       .from("books_read")
       .insert({
@@ -85,6 +94,8 @@ async function insertToReadBooks(added_book_id) {
         rating: rating.value,
         date: date_isostring,
         description: description.value,
+        start_date: start_date_obj,
+        finish_date: finish_date_obj,
       })
       .select();
     return data;
@@ -102,7 +113,6 @@ async function addTitle() {
     const added_book_id = book_data[0].book_id;
     const insertToReadBooksPromise = insertToReadBooks(added_book_id);
     insertToReadBooksPromise.then((read_book_data) => {
-      console.log(read_book_data[0]);
       emit("bookAdded", book_data[0], read_book_data[0]);
     });
   });

@@ -20,6 +20,8 @@
           <h2 class="font-bold underline">personal information</h2>
 
           <p>date added: {{ book_data.date }}</p>
+          <p>date started: {{ book_data.start_date }}</p>
+          <p>date finished: {{ book_data.finish_date }}</p>
           <div>
             <p class="mr-2 inline">rating:</p>
             <div class="inline">
@@ -102,6 +104,8 @@ async function getBookData() {
         book_data.value["rating"] = specificData[0].rating;
         book_data.value["date"] = specificData[0].date;
         book_data.value["description"] = specificData[0].description;
+        book_data.value["start_date"] = specificData[0].start_date;
+        book_data.value["finish_date"] = specificData[0].finish_date;
 
         getGeneralData(book_id).then((generalData) => {
           book_data.value["title"] = generalData[0].title;

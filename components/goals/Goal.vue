@@ -95,6 +95,7 @@ supabase.auth.onAuthStateChange((event, session) => {
 // TODO: currently i make this request for every separate goal
 // would require less requests to somehow get all necessary books in one go and filter later?
 async function getBooksInRange(start_date, end_date) {
+  // TODO: decide whether i want to bound books by date added to site or date when user said they finished the book
   const { data, error } = await supabase
     .from("books_read")
     .select()
